@@ -75,10 +75,32 @@ const quickSort = (arr, start = 0, end = arr.length - 1) => {
         return;
     }
     let pivotIndex = partition(arr,start,end);
-    quickSort(arr,start,pivotIndex-1);
+    quickSort(arr,start,pivotIndex - 1);
     quickSort(arr, pivotIndex + 1,end);
     return arr;
 }
 console.log(quickSort(arr4));
 
-//
+//mergeSort 
+const arr5 = [8, 3, 5, 4, 7, 6, 1, 2];
+function merge (left, right) {
+    let sortedArr = [];
+    while(left.length && right.length) {
+        if(left[0] < right[0]) {
+            sortedArr.push(left.shift());
+        } else {
+            sortedArr.push(right.shift());
+        };
+    };
+    return [...sortedArr, ...left, ...right];
+};
+const mergeSort = arr => {
+    if(arr.length <= 1) {
+        return arr;
+    };
+    let mid = Math.floor(arr.length / 2);
+    let left = mergeSort(arr.slice(0,mid));
+    let right = mergeSort(arr.slice(mid));
+    return merge(left,right);
+};
+console.log(mergeSort(arr5));
