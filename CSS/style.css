@@ -9,7 +9,12 @@
 }
 
 .body {
+  width: 100vw;
+  height: 100vh;
   background-color: rgb(38, 144, 148);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
@@ -61,6 +66,7 @@
 .form_main .genderbox {
   display: flex;
   flex-wrap: wrap;
+  column-gap: 5px;
 }
 .form_main .genderbox > .gendertext {
   flex-basis: 100%;
@@ -71,6 +77,7 @@
 .form_main .hobbiesbox {
   display: flex;
   flex-wrap: wrap;
+  column-gap: 5px;
 }
 .form_main .hobbiesbox > .hobbietext {
   flex-basis: 100%;
