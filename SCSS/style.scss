@@ -101,8 +101,19 @@
 #incomerange {
     width: $h-cln-input-width - 30px;
 }
-// .fname {
+// .validation-result_success {
 //     position: relative;
+//     height: 15px;
+//     margin: 2px;
+//     display: block;
+    
+// }
+// .validation-result_error {
+//     position: relative;
+//     height: 15px;
+//     margin: 2px;
+//     display: block;
+    
 // }
 // .icon {
 //     width: 20px;
@@ -110,5 +121,7 @@
 //     position: absolute;
 //     z-index: 2;
 //     left: 0;
+//     margin-left: 5px;
 // }
+
 

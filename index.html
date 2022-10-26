@@ -16,8 +16,14 @@
             <div class="input-box fnamebox">
                 <label for="fname">First name *</label>
                 <input class="fname" id="fname" type="text" placeholder="Enter your first name" required>
-                <!-- <img id="error-icon" class="icon" src="/icons/error-icon.png" alt="error-icon">
-                <img id="success-icon" class="icon" src="/icons/success-icon.png" alt="success-icon"> -->
+                <!-- <div class="validation-result_success">
+                    <p class="validation-result_succes__text"></p>
+                    <img id="success-icon" class="icon icon_success" src="/icons/success-icon.png" alt="success-icon">
+                </div>
+                <div class="validation-result_error">
+                    <p class="validation-result_error__text"></p>
+                    <img id="error-icon" class="icon icon_error" src="/icons/error-icon.png" alt="error-icon">
+                </div> -->
             </div>
             <div class="input-box lnamebox">
                 <label for="lname">Last name *</label>
@@ -71,8 +77,8 @@
                 <input type="file" id="profilepictureupload" name="profilepictureupload">
             </div>
             <div class="age">
-                <label for="ageinput">Age</label>
-                <input type="number" id="ageinput" name="ageinput">
+                <label for="ageinput">Date of birth</label>
+                <input type="text" id="ageinput" name="ageinput" placeholder="dd.mm.yyyy">
             </div>
             <div class="bio">
                 <label for="biotextarea">Bio</label>
