@@ -19,20 +19,25 @@ class Validator {
     }
     isEmail(field) {
         if(field.type === "email") {
-            const regex = /\S+@\S+\.\S+/;
-            if(regex.test(field.value)){
-                this.setStatus(true);
+            if(field.value === "") {
+                this.setStatus(false, field.id);
             } else {
-                this.setStatus(false);
+                const regex = /\S+@\S+\.\S+/;
+                if(regex.test(field.value)){
+                    this.setStatus(true, field.id);
+                } else {
+                    this.setStatus(false, field.id);
+                }
             }
+            
         }
     }
     isRequired(field) {
-        if(field.id === "fname" || "lname" || "psw" || "pswagain" || "email") {
+        if(field.id === "fname" || field.id === "lname" || field.id === "psw" || field.id === "pswagain") {
             if(field.value === ""){
-                this.setStatus(false);
+                this.setStatus(false, field.id);
             } else {
-                this.setStatus(true);
+                this.setStatus(true, field.id);
             };
         };
     }
@@ -40,24 +45,27 @@ class Validator {
         if(field.id === "ageinput") {
             const d_reg = /^(0?[1-9]|[12][0-9]|3[01])[\/\-\.](0?[1-9]|1[012])[\/\-\.]\d{4}$/;
             if(d_reg.test(field.value)) {
-                this.setStatus(true);
                 const year = Number(field.value.slice(6));
                 if(year < 1920 || year > 2030) {
-                    this.setStatus(false);
+                    this.setStatus(false, field.id);
                 } else {
-                    this.setStatus(true);
+                    this.setStatus(true, field.id);
                 }
             } else {
-                this.setStatus(false);
+                this.setStatus(false, field.id);
             }
 
         }
     }
-    setStatus(status) {
+    setStatus(status, fid) {
+        const element = document.getElementById(fid);
         if(status === true) {
             console.log("SUCCESS");
+            console.log(`${element.id}`);
+            element.style.outlineColor = "green";
         } else if(status === false) {
             console.log("ERROR");
+            element.style.outlineColor = "tomato";
         } else {
             console.log("");
         };
