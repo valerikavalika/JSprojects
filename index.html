@@ -16,30 +16,27 @@
             <div class="input-box fnamebox">
                 <label for="fname">First name *</label>
                 <input class="fname" id="fname" type="text" placeholder="Enter your first name" required>
-                <!-- <div class="validation-result_success">
-                    <p class="validation-result_succes__text"></p>
-                    <img id="success-icon" class="icon icon_success" src="/icons/success-icon.png" alt="success-icon">
-                </div>
-                <div class="validation-result_error">
-                    <p class="validation-result_error__text"></p>
-                    <img id="error-icon" class="icon icon_error" src="/icons/error-icon.png" alt="error-icon">
-                </div> -->
+                <span class="error-message" id="fname-error">This field is required.</span>
             </div>
             <div class="input-box lnamebox">
                 <label for="lname">Last name *</label>
                 <input id="lname" type="text" placeholder="Enter your last name" required>
+                <span class="error-message" id="lname-error">This field is required.</span>
             </div>
             <div class="input-box emailbox">
                 <label for="email">Email *</label>
                 <input id="email" type="email" placeholder="Enter your Email" required>
+                <span class="error-message" id="email-error">This field is required.</span>
             </div>
             <div class="input-box pswbox">
                 <label for="psw">Password *</label>
                 <input id="psw" type="password" placeholder="Enter your Password" required>
+                <span class="error-message" id="psw-error">This field is required.</span>
             </div>
             <div class="input-box pswagainbox">
                 <label for="pswagain">Confirm password *</label>
                 <input id="pswagain" type="password" placeholder="Enter your password again" required>
+                <span class="error-message" id="pswagain-error">This field is required.</span>
             </div>
             <div class="gender genderbox">
                 <span class="gendertext">Gender</span>
@@ -79,6 +76,8 @@
             <div class="age">
                 <label for="ageinput">Date of birth</label>
                 <input type="text" id="ageinput" name="ageinput" placeholder="dd.mm.yyyy">
+                <span class="error-message" id="ageinput-error">The date format is invalid.(Use"dd/mm/yyyy" / "dd.mm.yyyy" / "dd-mm-yyyy".</span>
+
             </div>
             <div class="bio">
                 <label for="biotextarea">Bio</label>
