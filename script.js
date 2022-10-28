@@ -2,116 +2,160 @@ class Validator {
     constructor(form, fields) {
     this.form = form
     this.fields = fields
-    };
+    }
     initialize() {
         this.validateOnEntry()
-    };
+    }
     validateOnEntry() {
-        let self = this
+        const self = this
         this.fields.forEach(field => {
             const input = document.querySelector(`#${field}`);
             input.addEventListener ('input', () => {
-                self.isEmail(input)
                 self.isRequired(input)
-                self.isData(input)
+                self.checkEmailInput(input)
+                self.checkDateInput(input)
                 self.isSamePassword(input)
             })
         })
-    };
-    isEmail(field) {
-        if(field.type === "email") {
-            const emailElement = document.getElementById(`email-error`);
-            // if field is empty write The field is required meessage 
-            if(field.value === "") {
-                emailElement.innerHTML = `This field is required.`;
-                this.setStatus(false, field.id);
-            } else {
-                //if field is not empty show error message until the email format is valid
-                const regex = /\S+@\S+\.\S+/;
-                if(regex.test(field.value)){
-                    this.setStatus(true, field.id);
-                } else {
-                    emailElement.innerHTML = `The email address is invalid.`;
-                    this.setStatus(false, field.id);
-                }
-            }
-            
-        }
-    };
+    }
     isRequired(field) {
         if(field.id === "fname" || field.id === "lname" || field.id === "psw" || field.id === "pswagain") {
             if(field.value === ""){
                 this.setStatus(false, field.id);
             } else {
                 this.setStatus(true, field.id);
-            };
-        };
-    };
-    isData(field) {
-        if(field.id === "ageinput") {
-            const dateElement = document.getElementById(`ageinput-error`);
-            const d_reg = /^(0?[1-9]|[12][0-9]|3[01])[\/\-\.](0?[1-9]|1[012])[\/\-\.]\d{4}$/;
-            if (field.value === "") {
-                // if the field is empty do not show the error message - the field is not required
-                this.setStatus("", field.id);
-            } else {
-                //if the field is not emty test if the date format is valid
-            if(d_reg.test(field.value)) {
-                const year = Number(field.value.slice(6));
-                const currentYear = new Date().getFullYear();
-                // if the date format is valid check if the year is valid
-                if(year < 1920 || year > currentYear) {
-                    dateElement.innerHTML = "The year is not valid";
-                    this.setStatus(false, field.id);
-                } else {
-                    this.setStatus(true, field.id);
-                }
-            } else {
-                // if the date format is not valid show error
-                dateElement.innerHTML = "The date format is invalid.(Use\"dd/mm/yyyy\" / \"dd.mm.yyyy\" / \"dd-mm-yyyy\".";
-                this.setStatus(false, field.id);
-            }
             }
         }
-    };
+    }
+    checkEmailInput(field) {
+        // if the field is empty set the field is required error message, 
+        // else check if the email input is valid
+        if(field.type === "email") {
+            if(field.value === "") {
+                this.setIsRequiredErrorText(field.id);
+                this.setStatus(false, field.id);
+            } else {
+                this.isEmail(field);
+            }
+            
+        }
+    }
+    isEmail(field) {
+        const regex = /\S+@\S+\.\S+/;
+        if(regex.test(field.value)){
+            this.setStatus(true, field.id);
+        } else {
+            this.setIsEmailErrorText(field.id);
+            this.setStatus(false, field.id);
+        }
+    }
+    
+    checkDateInput(field) {
+        // if the field is empty show nothing, 
+        // else check if the date input is valid
+        if(field.id === "ageinput") {
+            if (field.value === "") {
+                this.setStatus("", field.id);
+            } else {
+                this.isDate(field);            
+            }
+        }
+    }
+    isDate(field) {
+        // if date format is valid check if the year is valid else show Error
+        const date_reg = /^(0?[1-9]|[12][0-9]|3[01])[\/\-\.](0?[1-9]|1[012])[\/\-\.]\d{4}$/;
+        if(date_reg.test(field.value)) {
+            this.isYear(field);
+        } else {
+            this.setIsDateErrorText(field.id);
+            this.setStatus(false, field.id);
+        }
+    }
+    isYear(field) {
+        const year = Number(field.value.slice(6));
+        const currentYear = new Date().getFullYear();
+        if(year < 1920 || year > currentYear) {
+            this.setIsYearErrorText(field.id);
+            this.setStatus(false, field.id);
+        } else {
+            this.setStatus(true, field.id);
+        }
+    }
     isSamePassword(field) {
         if(field.id === "pswagain") {
-            const pswAgainElement = document.getElementById(`pswagain-error`);
             const pswInput = document.getElementById(`psw`);
             //if the password confirmation input value is NOT the same as password value show special error
             if(field.value !== pswInput.value){
-                pswAgainElement.innerHTML = `The password confirmation does not match.`;
+                this.setIsSamePasswordErrorText(field.id)
                 this.setStatus(false, field.id)
             } else if (field.value === pswInput.value && field.value !== "") {
                 // if the field is matching the password value show no error messages - success
                 this.setStatus(true, field.id)
             } else {
                 // if the field is empty show error the field is required
-                pswAgainElement.innerHTML = `This field is required.`;
-                this.setStatus(false, field.id);
+                this.setIsRequiredErrorText(field.id)
+                this.setStatus(false, field.id)
             }
         }
     }
-    setStatus(status, fid) {
-        const element = document.getElementById(fid);
-        const errorMessage = document.getElementById(`${fid}-error`);
+    setStatus(status, field_id) {
         if(status === true) {
-            // do this when methods send true (success)
-            element.style.outlineColor = "green";
-            element.style.border = "solid 1px green";
-            errorMessage.style.visibility = "hidden";
+            this.statusSuccess(field_id);
         } else if(status === false) {
-            // do this when methods send false (error)
-            element.style.outlineColor = "red";
-            element.style.border = "solid 1px red";
-            errorMessage.style.visibility = "visible";
+            this.statusError(field_id);
         } else {
-            // hide all error messages, do not show success 
-            errorMessage.style.visibility = "hidden";
-            element.style.outlineColor = "";
-            element.style.border = "solid 1px grey";
-        };
-    };
+            this.statusDefault(field_id);
+        }
+    }
+    //errors
+    //errors-messages
+    setIsRequiredErrorText (field_id) {
+        const errorElement = document.getElementById(`${field_id}-error`);
+        const isRequiredErrorText = `This field is required.`;
+        errorElement.innerHTML = isRequiredErrorText;
+    }
+    setIsEmailErrorText (field_id) {
+        const errorElement = document.getElementById(`${field_id}-error`);
+        const isEmailErrorText = `The email address is invalid.`;
+        errorElement.innerHTML = isEmailErrorText;
+    }
+    setIsDateErrorText (field_id) {
+        const errorElement = document.getElementById(`${field_id}-error`);
+        const isDateErrorText = "The date format is invalid.(Use\"dd/mm/yyyy\" / \"dd.mm.yyyy\" / \"dd-mm-yyyy\".";
+        errorElement.innerHTML = isDateErrorText;
+    }
+    setIsYearErrorText (field_id) {
+        const errorElement = document.getElementById(`${field_id}-error`);
+        const isYearErrorText = "The year is not valid";
+        errorElement.innerHTML = isYearErrorText;
+    }
+    setIsSamePasswordErrorText (field_id) {
+        const errorElement = document.getElementById(`${field_id}-error`);
+        const isSamePasswordErrorText = `The password confirmation does not match.`;
+        errorElement.innerHTML = isSamePasswordErrorText;
+    }
+    //change styles depending on status value
+    statusSuccess(field_id) {
+        const element = document.getElementById(field_id);
+        const errorMessage = document.getElementById(`${field_id}-error`);
+        element.style.outlineColor = "green";
+        element.style.border = "solid 1px green";
+        errorMessage.style.visibility = "hidden";
+    }
+    statusError(field_id) {
+        const element = document.getElementById(field_id);
+        const errorMessage = document.getElementById(`${field_id}-error`);
+        element.style.outlineColor = "red";
+        element.style.border = "solid 1px red";
+        errorMessage.style.visibility = "visible";
+    }
+    statusDefault(field_id) {
+        const element = document.getElementById(field_id);
+        const errorMessage = document.getElementById(`${field_id}-error`);
+        errorMessage.style.visibility = "hidden";
+        element.style.outlineColor = "";
+        element.style.border = "solid 1px grey";
+    }
 };
 
 const form = document.querySelector('.form_main');

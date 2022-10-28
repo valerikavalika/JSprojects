@@ -15,20 +15,21 @@
     color: $textc;
     font-size: 15px;
     }
-.form_header, .form_footer {
+.form &_header &_footer {
     background-color: $header-footerc;
     height: 50px;
     color: $header-footertextc;
 }
-.form_header {
+.form &_header {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.form_footer {
+    }
+    &_footer {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    }
     .createbtn {
         width: 50px;
         height: 35px;
@@ -38,8 +39,7 @@
         border-radius: 15%;
         @extend %tplborder;
     }
-}
-.form_main {
+    &_main {
     background-color: $mainc;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -80,6 +80,7 @@
         flex-wrap: wrap;
     }
 }
+
 .income_range_max_detail {
     margin: 0px;
     padding: 1px;
