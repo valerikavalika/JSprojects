@@ -4,91 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account Form</title>
-    <link rel="stylesheet" href="/CSS/style.css"/>
+    <title>Weather app</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
+    <link rel="stylesheet" href="/CSS/style.css">
 </head>
 <body class="body">
-    <form class="container">
-        <div class="form_header">
-            <h1>Create Account</h1>
+    <div class="card">
+        <div class="search">
+            <input type="text" class="search-bar" placeholder="Search">
+            <button class="button">Search</button>
         </div>
-        <div class="form_main">
-            <div class="input-box fnamebox">
-                <label for="fname">First name *</label>
-                <input class="fname" id="fname" type="text" placeholder="Enter your first name" required>
-                <span class="error-message" id="fname-error">This field is required.</span>
-            </div>
-            <div class="input-box lnamebox">
-                <label for="lname">Last name *</label>
-                <input id="lname" type="text" placeholder="Enter your last name" required>
-                <span class="error-message" id="lname-error">This field is required.</span>
-            </div>
-            <div class="input-box emailbox">
-                <label for="email">Email *</label>
-                <input id="email" type="email" placeholder="Enter your Email" required>
-                <span class="error-message" id="email-error">This field is required.</span>
-            </div>
-            <div class="input-box pswbox">
-                <label for="psw">Password *</label>
-                <input id="psw" type="password" placeholder="Enter your Password" required>
-                <span class="error-message" id="psw-error">This field is required.</span>
-            </div>
-            <div class="input-box pswagainbox">
-                <label for="pswagain">Confirm password *</label>
-                <input id="pswagain" type="password" placeholder="Enter your password again" required>
-                <span class="error-message" id="pswagain-error">This field is required.</span>
-            </div>
-            <div class="gender genderbox">
-                <span class="gendertext">Gender</span>
-                <input type="radio" id="male" name="gender" value="Male">
-                <label  class="genderdetails" for="male">Male</label>
-                <input type="radio" id="female" name="gender" value="Female">
-                <label  class="genderdetails" for="female">Female</label>
-            </div>
-            <div class="hobbies hobbiesbox">
-                <span class="hobbietext">Hobbies</span>
-                <input type="checkbox" id="hobbie1" value="Music">
-                <label for="hobbie1" class="hobbiedetailes">Music</label>
-                <input type="checkbox" id="hobbie2" value="Sport">
-                <label for="hobbie2" class="hobbiedetailes">Sport</label>
-                <input type="checkbox" id="hobbie3" value="Travel">
-                <label for="hobbie3" class="hobbiedetailes">Travel</label>
-                <input type="checkbox" id="hobbie4" value="Movies">
-                <label for="hobbie4" class="hobbiedetailes">Movies</label>
-            </div>
-            <div class="source_of_income">
-                <label for="incomesource">Source of Income</label>
-                <select name="incomesource" id="incomesource">
-                    <option value="employed">Employed</option>
-                    <option value="freelance">Freelance</option>
-                    <option value="companyowner">Company owner</option>
-                </select>
-            </div>
-            <div class="income_range">
-                <label for="incomerange">Income</label>
-                <input type="range" id="incomerange" name="incomerange" min="0" max="20 000">
-                <div class="income_range_max_detail">20K</div>
-            </div>
-            <div class="profile_picture">
-                <label for="profilepictureupload">Upload your profile picture</label>
-                <input type="file" id="profilepictureupload" name="profilepictureupload">
-            </div>
-            <div class="age">
-                <label for="ageinput">Date of birth</label>
-                <input type="text" id="ageinput" name="ageinput" placeholder="dd.mm.yyyy">
-                <span class="error-message" id="ageinput-error">The date format is invalid.(Use"dd/mm/yyyy" / "dd.mm.yyyy" / "dd-mm-yyyy".</span>
-
-            </div>
-            <div class="bio">
-                <label for="biotextarea">Bio</label>
-                <textarea id="biotextarea" name="biotextarea"></textarea>
-            </div>
+        <div class="weather">
+            <h2 class="city">Weather in Bratislava</h2>
+            <h1 class="temp">25°C</h1>
+            <img class="icon" src="" alt="">
+            <div class="description">Cloudy</div>
+            <div class="humidity">Humidity: 60%</div>
+            <div class="wind">Wind speed: 6.2 km/h</div>
         </div>
-        <div class="form_footer">
-            <button type="submit" class="createbtn">Create</button>
-        </div>
-
-    </form>
+    </div>
     <script src="/script.js"></script>
 </body>
 </html>
