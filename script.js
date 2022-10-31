@@ -41,7 +41,7 @@ class ForecastWeather {
         )
         .then((response) => response.json())
         .then((data) => {
-            this.checkForecastData(data);
+            this.displayForecastWeather(this.checkForecastData(data), this.checkDay());
         });
     }
     this.displayForecastWeather =  function(dataArray, days) {
@@ -74,9 +74,9 @@ checkForecastData(data) {
     for(let i=1; i < 5; i++){
         dataArray.push(data.list[8*i]);
     };
-    this.checkDay(dataArray);
+    return dataArray;
 }
-checkDay(dataArray) {
+checkDay() {
     const date = new Date();
     const weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     let d = date.getDay();
@@ -89,7 +89,7 @@ checkDay(dataArray) {
         days.push(weekday[d]);
     }
     }
-    this.displayForecastWeather(dataArray, days);
+    return days;
 }
 }
 const city = "Bratislava";
