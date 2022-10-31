@@ -47,21 +47,8 @@ class ForecastWeather {
     this.displayForecastWeather =  function(dataArray, days) {
         const forecastElement = document.querySelector('.list');
         let displayForecast = [];
-        let displayForWeather = dataArray.map(function(object) {
-            const { icon } = object.weather[0];
-            const { description }  = object.weather[0];
-            const  { temp } = object.main;
-            return ` <div class="weather-forecast forecast">
-            <img class="forecast__icon" src="http://openweathermap.org/img/wn/${icon}.png" alt="weather-icon">
-            <div class="forecast__description">${description}</div>
-            <h2 class="forecast__temp"> ${temp}°C</h2>
-            </div>
-            </div>`;
-        });
-        let displayWeekday = days.map(function(day) {
-            return `<div class="forecast-box">
-            <div class="forecast__day">${day}</div>`
-        });
+        let displayForWeather = this.displayForWeather(dataArray);
+        let displayWeekday = this.displayWeekday(days);
         for(let i = 0; i < 4; i++){
             displayForecast[i] = displayWeekday[i] + displayForWeather[i];
         };
@@ -71,6 +58,27 @@ class ForecastWeather {
     this.search =  function () {
         this.fetchForecastWeather(document.querySelector(".search-bar").value);
     }
+}
+displayForWeather(dataArray) {
+    let displayForWeather = dataArray.map(function(object) {
+        const { icon } = object.weather[0];
+        const { description }  = object.weather[0];
+        const  { temp } = object.main;
+        return ` <div class="weather-forecast forecast">
+        <img class="forecast__icon" src="http://openweathermap.org/img/wn/${icon}.png" alt="weather-icon">
+        <div class="forecast__description">${description}</div>
+        <h2 class="forecast__temp"> ${temp}°C</h2>
+        </div>
+        </div>`;
+    });
+    return displayForWeather;
+}
+displayWeekday(days) {
+    let displayWeekday = days.map(function(day) {
+        return `<div class="forecast-box">
+        <div class="forecast__day">${day}</div>`
+    });
+    return displayWeekday;
 }
 checkForecastData(data) {
     let dataArray =[];

@@ -8,15 +8,14 @@
     align-items: center;
     height: 100vh;
     font-family: Montserrat;
-    background: #222;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(/images/background-image.webp);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     font-size: 120%;
+    @extend %background-shade-and-image-template
 }
 .card {
-    background: #000000d0;
+    background: $card-background;
     color: azure;
     padding: 2em;
     border: 30px;
@@ -32,40 +31,42 @@
     align-items: center;
     justify-content: center;
     padding: 10px;
-}
-.button {
-    margin: 0.5em;
-    border-radius: 50%;
-    border: none;
-    height: 40px;
-    width: 40px;
-    outline: none;
-    background: #7c7c7c2b;
-    color: azure;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
+    &__button {
+        margin: 0.5em;
+        border-radius: 50%;
+        border: none;
+        height: 40px;
+        width: 40px;
+        outline: none;
+        background: $search-background;
+        color: $texcolor;
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+    }
+    &__bar {
+        border: none;
+        outline: none;
+        padding: 0.4em 1em;
+        border-radius: 24px;
+        background: $search-background;
+        color: $texcolor;
+        font-family: inherit;
+        font-size: 105%;
+        width: calc(100% - 50px);
+    }
 }
 .button:hover {
-    background: #7c7c7c6b;
-}
-.search-bar {
-    border: none;
-    outline: none;
-    padding: 0.4em 1em;
-    border-radius: 24px;
-    background: #7c7c7c2b;
-    color: azure;
-    font-family: inherit;
-    font-size: 105%;
-    width: calc(100% - 50px);
+    background: $search-background-hover;
 }
 
-.icon-box {
+.weather {
+    &__icon-box {
     display: flex;
     align-items: center;
-}
-.description {
-    text-transform: capitalize;
+    }
+    &__description {
+        text-transform: capitalize;
+    }
 }
 .loading {
     visibility: hidden;
@@ -74,17 +75,13 @@
 .loading::after {
     visibility: visible;
     content: "Loading ... ";
-    color: azure;
+    color: $texcolor;
     position: absolute;
     top: 0;
     left: 0;
 }
-.forecast-box {
-    font-family: inherit;
-    display: flex;
-    font-size: 18px;
-    border-top: 2px solid #F0FFFF2b;
-    padding-left: 10px;
+.list {
+    margin-top: 20px;
 }
 .forecast {
     display: flex;
@@ -99,5 +96,12 @@
     }
     &__day {
         flex: 1 1 15%;
+    }
+    &-box {
+        font-family: inherit;
+        display: flex;
+        font-size: 18px;
+        border-top: 2px solid #F0FFFF2b;
+        padding-left: 10px;
     }
 }
