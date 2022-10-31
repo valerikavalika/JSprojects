@@ -79,3 +79,25 @@
     top: 0;
     left: 0;
 }
+.forecast-box {
+    font-family: inherit;
+    display: flex;
+    font-size: 18px;
+    border-top: 2px solid #F0FFFF2b;
+    padding-left: 10px;
+}
+.forecast {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    padding-left: 10px;
+    column-gap: 10px;
+    flex: 1 1 85%;
+    &__temp {
+        font-size: 18px;
+    }
+    &__day {
+        flex: 1 1 15%;
+    }
+}

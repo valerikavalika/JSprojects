@@ -90,4 +90,28 @@
   left: 0;
 }
 
+.forecast-box {
+  font-family: inherit;
+  display: flex;
+  font-size: 18px;
+  border-top: 2px solid rgba(240, 255, 255, 0.168627451);
+  padding-left: 10px;
+}
+
+.forecast {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  padding-left: 10px;
+  column-gap: 10px;
+  flex: 1 1 85%;
+}
+.forecast__temp {
+  font-size: 18px;
+}
+.forecast__day {
+  flex: 1 1 15%;
+}
+
 /*# sourceMappingURL=style.css.map */
