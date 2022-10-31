@@ -68,6 +68,9 @@ class ForecastWeather {
         displayForecast = displayForecast.join("");
         forecastElement.innerHTML = displayForecast;
     }
+    this.search =  function () {
+        this.fetchForecastWeather(document.querySelector(".search-bar").value);
+    }
 }
 checkForecastData(data) {
     let dataArray =[];
@@ -101,9 +104,11 @@ currentForecastWeather.fetchForecastWeather(city);
 
 document.querySelector(".button").addEventListener("click", function() {
     currentWeather.search();
+    currentForecastWeather.search();
 });
 document.querySelector(".search-bar").addEventListener("keyup", function (event) {
     if (event.key == "Enter") {
         currentWeather.search();
+        currentForecastWeather.search();
     }
 });
