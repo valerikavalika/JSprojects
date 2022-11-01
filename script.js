@@ -3,10 +3,7 @@ class Weather {
     this.apiKey = "71017ea68b8f5f9edd1b822e51b9f50f";
     this.fetchWeather = function(city) {
         fetch (
-            "https://api.openweathermap.org/data/2.5/weather?q=" 
-            + city 
-            + "&units=metric&appid=" 
-            + this.apiKey
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${this.apiKey}`
         )
         .then((response) => response.json())
         .then((data) => this.displayWeather(data));
@@ -16,12 +13,12 @@ class Weather {
         const { icon, description } = data.weather[0];
         const { temp, humidity } = data.main;
         const { speed } = data.wind;
-        document.querySelector('.city').innerText = "Weather in " + name;
-        document.querySelector(".icon").src = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+        document.querySelector('.city').innerText = `Weather in ${name}`;
+        document.querySelector(".icon").src = `http://openweathermap.org/img/wn/${icon}@2x.png`;
         document.querySelector(".description").innerText = description;
-        document.querySelector(".temp").innerText = temp + "°C";
-        document.querySelector(".humidity").innerText = "Humidity: " + humidity + "%";
-        document.querySelector(".wind").innerText = "Wind speed: " + speed + " km/h";
+        document.querySelector(".temp").innerText = `${temp}°C`;
+        document.querySelector(".humidity").innerText = `Humidity: ${humidity}%`;
+        document.querySelector(".wind").innerText = `Wind speed: ${speed} km/h`;
         document.querySelector(".weather").classList.remove("loading");
     }
     this.search =  function () {
@@ -34,10 +31,7 @@ class ForecastWeather {
     this.apiKey = "71017ea68b8f5f9edd1b822e51b9f50f"
     this.fetchForecastWeather = function(city) {
         fetch (
-            "https://api.openweathermap.org/data/2.5/forecast?q=" 
-            + city +
-            "&units=metric&appid=" 
-            + this.apiKey
+            `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${this.apiKey}`
         )
         .then((response) => response.json())
         .then((data) => {
@@ -47,8 +41,8 @@ class ForecastWeather {
     this.displayForecastWeather =  function(dataArray, days) {
         const forecastElement = document.querySelector('.list');
         let displayForecast = [];
-        let displayForWeather = this.displayForWeather(dataArray);
-        let displayWeekday = this.displayWeekday(days);
+        const displayForWeather = this.displayForWeather(dataArray);
+        const displayWeekday = this.displayWeekday(days);
         for(let i = 0; i < 4; i++){
             displayForecast[i] = displayWeekday[i] + displayForWeather[i];
         };
@@ -60,7 +54,7 @@ class ForecastWeather {
     }
 }
 displayForWeather(dataArray) {
-    let displayForWeather = dataArray.map(function(object) {
+    const displayForWeather = dataArray.map(function(object) {
         const { icon } = object.weather[0];
         const { description }  = object.weather[0];
         const  { temp } = object.main;
@@ -74,14 +68,14 @@ displayForWeather(dataArray) {
     return displayForWeather;
 }
 displayWeekday(days) {
-    let displayWeekday = days.map(function(day) {
+    const displayWeekday = days.map(function(day) {
         return `<div class="forecast-box">
         <div class="forecast__day">${day}</div>`
     });
     return displayWeekday;
 }
 checkForecastData(data) {
-    let dataArray =[];
+    const dataArray =[];
     for(let i=1; i < 5; i++){
         dataArray.push(data.list[8*i]);
     };
@@ -91,7 +85,7 @@ checkDay() {
     const date = new Date();
     const weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     let d = date.getDay();
-    let days = [];
+    const days = [];
     for (let i=0; i < 4; i++){
         d++;
     if (d > 6) {
