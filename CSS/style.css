@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-button, input {
+button, input, textarea {
   outline: none;
   border: none;
   background: none;
@@ -80,6 +80,9 @@ button, input {
 .form__input::placeholder {
   color: #6B7280;
 }
+.form__input:focus {
+  color: #EC4899;
+}
 .form__submit {
   color: #EC4899;
   font-size: 1.25rem;
@@ -129,6 +132,7 @@ button, input {
   width: 100%;
   display: block;
   transition: 0.4s;
+  padding: 5px 10px;
 }
 .task__text:not(:read-only) {
   color: #EC4899;

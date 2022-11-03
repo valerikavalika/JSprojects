@@ -61,6 +61,9 @@
     &__input::placeholder {
         color: $gray;
     }
+    &__input:focus {
+        color: $pink;
+    }
     &__submit {
         color: $pink;
         font-size: 1.25rem;
@@ -112,6 +115,7 @@
         width: 100%;
         display: block;
         transition: 0.4s;
+        padding: 5px 10px;
     }
     &__text:not(:read-only) {
         color: $pink;
