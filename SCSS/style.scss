@@ -3,40 +3,40 @@
 @import "templates";
 
 .body {
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
     background: $dark;
     color: $white;
 }
-// .container {
-//     padding: 0 15px;
-// }
-// @media (min-width: 575.98px) {
-//     .container {
-//         max-width: 540px;
-//         margin: auto;
-//         padding: 0;
-//     }
-// }
-// @media (min-width: 767.98px) {
-//     .container {
-//         max-width: 720px;
-//     }
-// }
-// @media (min-width: 991.98px) {
-//     .container {
-//         max-width: 960px;
-//     }
-// }
-// @media (min-width: 1199.98px) {
-//     .container {
-//         max-width: 1140px;
-//     }
-// }
+.container {
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+@media (min-width: 575.98px) {
+    .container {
+        max-width: 540px;
+        margin: auto;
+        padding: 0;
+    }
+}
+@media (min-width: 767.98px) {
+    .container {
+        max-width: 720px;
+    }
+}
+@media (min-width: 991.98px) {
+    .container {
+        max-width: 960px;
+    }
+}
+@media (min-width: 1199.98px) {
+    .container {
+        max-width: 1140px;
+    }
+}
 .header {
-    padding: 2rem 1rem;
-    max-width: 800px;
+    padding: 2rem 0;
     width: 100%;
     margin: 0 auto;
     &__title {
@@ -49,12 +49,6 @@
 
 .form {
     display: flex;
-    &__input, &__button {
-        appearance: none;
-        border: none;
-        outline: none;
-        background: none;
-    }
     &__input {
         flex: 1 1 0%;
         background-color: $darker;
@@ -71,12 +65,9 @@
         color: $pink;
         font-size: 1.25rem;
         font-weight: 700;
-        background-image: linear-gradient(to right, $pink, $purple);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
         cursor: pointer;
         transition: 0.4s;
+        @extend %gradient-background-template;
     }
     &__submit:hover {
         opacity: 0.8;
@@ -88,13 +79,11 @@
 
 .main {
     flex: 1 1 0%;
-    padding: 2rem 1rem;
-    max-width: 800px;
+    padding: 2rem 0;
     width: 100%;
     margin: 0 auto;
 }
 .list {
-    padding: 1rem;
     &__title {
         font-size: 1.5rem;
         font-weight: 300;
@@ -143,12 +132,9 @@
         opacity: 0.6;
     }
     &__edit {
-        background-image: linear-gradient(to right, $pink, $purple);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        @extend %gradient-background-template;
     }
     &__delete {
-        color: crimson;
+        color: $red;
     }
 }
