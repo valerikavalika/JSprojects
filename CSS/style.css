@@ -4,116 +4,138 @@
   box-sizing: border-box;
 }
 
-.body {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)), url(/images/background-image.webp);
+button, input {
+  outline: none;
+  border: none;
+  background: none;
 }
 
 .body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-family: Montserrat;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  font-size: 120%;
-}
-
-.card {
-  background: rgba(0, 0, 0, 0.8156862745);
-  color: azure;
-  padding: 2em;
-  border: 30px;
-  width: 100%;
-  max-width: 420px;
-  margin: 1em;
   display: flex;
   flex-direction: column;
-  row-gap: 5px;
+  min-height: 100vh;
+  background: #374151;
+  color: #FFF;
 }
 
-.search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
+.header {
+  padding: 2rem 1rem;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
 }
-.search__button {
-  margin: 0.5em;
-  border-radius: 50%;
+.header__title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  color: #6B7280;
+}
+
+.form {
+  display: flex;
+}
+.form__input, .form__button {
+  appearance: none;
   border: none;
-  height: 40px;
-  width: 40px;
   outline: none;
-  background: rgba(124, 124, 124, 0.168627451);
-  color: azure;
+  background: none;
+}
+.form__input {
+  flex: 1 1 0%;
+  background-color: #1F2937;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-right: 1rem;
+  color: #EEE;
+  font-size: 1.25rem;
+}
+.form__input::placeholder {
+  color: #6B7280;
+}
+.form__submit {
+  color: #EC4899;
+  font-size: 1.25rem;
+  font-weight: 700;
+  background-image: linear-gradient(to right, #EC4899, #8B5Cf6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   cursor: pointer;
-  transition: 0.2s ease-in-out;
+  transition: 0.4s;
 }
-.search__bar {
-  border: none;
-  outline: none;
-  padding: 0.4em 1em;
-  border-radius: 24px;
-  background: rgba(124, 124, 124, 0.168627451);
-  color: azure;
-  font-family: inherit;
-  font-size: 105%;
-  width: calc(100% - 50px);
+.form__submit:hover {
+  opacity: 0.8;
+}
+.form__submit:submit {
+  opacity: 0.6;
 }
 
-.button:hover {
-  background: rgba(124, 124, 124, 0.4196078431);
-}
-
-.weather__icon-box {
-  display: flex;
-  align-items: center;
-}
-.weather__description {
-  text-transform: capitalize;
-}
-
-.loading {
-  visibility: hidden;
-  position: relative;
-}
-
-.loading::after {
-  visibility: visible;
-  content: "Loading ... ";
-  color: azure;
-  position: absolute;
-  top: 0;
-  left: 0;
+.main {
+  flex: 1 1 0%;
+  padding: 2rem 1rem;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .list {
-  margin-top: 20px;
+  padding: 1rem;
+}
+.list__title {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #6B7280;
+  margin-bottom: 1rem;
 }
 
-.forecast {
+.task {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  font-size: 16px;
-  padding-left: 10px;
-  column-gap: 10px;
-  flex: 1 1 85%;
+  background-color: #111827;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
 }
-.forecast__temp {
-  font-size: 18px;
+.task__content {
+  flex: 1 1 0%;
 }
-.forecast__day {
-  flex: 1 1 15%;
+.task__text {
+  color: #EEE;
+  font-size: 1.125rem;
+  width: 100%;
+  display: block;
+  transition: 0.4s;
 }
-.forecast-box {
-  font-family: inherit;
+.task__text:not(:read-only) {
+  color: #EC4899;
+}
+
+.action {
   display: flex;
-  font-size: 18px;
-  border-top: 2px solid rgba(240, 255, 255, 0.168627451);
-  padding-left: 10px;
+  margin: 0 -0.5rem;
+}
+.action__button {
+  cursor: pointer;
+  margin: 0 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.4s;
+}
+.action__button:hover {
+  opacity: 0.8;
+}
+.action__button:active {
+  opacity: 0.6;
+}
+.action__edit {
+  background-image: linear-gradient(to right, #EC4899, #8B5Cf6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.action__delete {
+  color: crimson;
 }
 
 /*# sourceMappingURL=style.css.map */

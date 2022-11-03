@@ -1,3 +1,154 @@
 @import "reset";
 @import "variables";
 @import "templates";
+
+.body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: $dark;
+    color: $white;
+}
+// .container {
+//     padding: 0 15px;
+// }
+// @media (min-width: 575.98px) {
+//     .container {
+//         max-width: 540px;
+//         margin: auto;
+//         padding: 0;
+//     }
+// }
+// @media (min-width: 767.98px) {
+//     .container {
+//         max-width: 720px;
+//     }
+// }
+// @media (min-width: 991.98px) {
+//     .container {
+//         max-width: 960px;
+//     }
+// }
+// @media (min-width: 1199.98px) {
+//     .container {
+//         max-width: 1140px;
+//     }
+// }
+.header {
+    padding: 2rem 1rem;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    &__title {
+        font-size: 2.5rem;
+        font-weight: 300;
+        margin-bottom: 1rem;
+        color: $gray;
+    }
+}
+
+.form {
+    display: flex;
+    &__input, &__button {
+        appearance: none;
+        border: none;
+        outline: none;
+        background: none;
+    }
+    &__input {
+        flex: 1 1 0%;
+        background-color: $darker;
+        padding: 1rem;
+        border-radius: 1rem;
+        margin-right: 1rem;
+        color: $light;
+        font-size: 1.25rem;
+    }
+    &__input::placeholder {
+        color: $gray;
+    }
+    &__submit {
+        color: $pink;
+        font-size: 1.25rem;
+        font-weight: 700;
+        background-image: linear-gradient(to right, $pink, $purple);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        cursor: pointer;
+        transition: 0.4s;
+    }
+    &__submit:hover {
+        opacity: 0.8;
+    }
+    &__submit:submit {
+        opacity: 0.6;
+    }
+}
+
+.main {
+    flex: 1 1 0%;
+    padding: 2rem 1rem;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+.list {
+    padding: 1rem;
+    &__title {
+        font-size: 1.5rem;
+        font-weight: 300;
+        color: $gray;
+        margin-bottom: 1rem;
+    }
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    background-color: $darkest;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    &__content {
+        flex: 1 1 0%;
+    }
+    &__text {
+        color: $light;
+        font-size: 1.125rem;
+        width: 100%;
+        display: block;
+        transition: 0.4s;
+    }
+    &__text:not(:read-only) {
+        color: $pink;
+    }
+}
+
+.action {
+    display: flex;
+    margin: 0 -0.5rem;
+    &__button {
+        cursor: pointer;
+        margin: 0 0.5rem;
+        font-size: 1.125rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: 0.4s;
+    }
+    &__button:hover {
+        opacity: 0.8;
+    }
+    &__button:active {
+        opacity: 0.6;
+    }
+    &__edit {
+        background-image: linear-gradient(to right, $pink, $purple);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    &__delete {
+        color: crimson;
+    }
+}

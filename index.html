@@ -5,9 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
-    <title>ToDoList</title>
+    <title>To Do List</title>
 </head>
-<body>
-    <script src="/script.js"></script>
+<body class="body">
+    <div class="container">
+        <header class ="header">
+            <h1 class="header__title">Task List</h1>
+        <form id="new-task-form" class="header__form form">
+            <input type="text" class="form__input" id="new-task-input" placeholder="What do you have planned?"/>
+            <input type="submit" class="form__submit" id="new-task-submit" value="Add task"/>
+        </form>
+        </header>
+        <main class="main">
+            <section class="task-list list">
+                <h2 class="list__title">Tasks</h2>
+                <div id="tasks" class="list__tasks">
+                    <div class="list__task task">
+                        <div class="task__content">
+                            <input type="text" class="task__text" value="My shiny task" readonly>
+                        </div>
+                        <div class="task__actions action">
+                            <button class="action__edit action__button">Edit</button>
+                            <button class="action__delete action__button">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+<script src="/script.js"></script>
 </body>
 </html>
