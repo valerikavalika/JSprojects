@@ -91,6 +91,9 @@
         margin-bottom: 1rem;
     }
 }
+.list__tasks {
+    visibility: visible;
+}
 
 .task {
     display: flex;
@@ -99,6 +102,7 @@
     padding: 1rem;
     border-radius: 1rem;
     margin-bottom: 1rem;
+    // visibility: visible;
     &__content {
         flex: 1 1 0%;
     }

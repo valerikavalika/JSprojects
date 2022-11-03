@@ -108,6 +108,10 @@ button, input {
   margin-bottom: 1rem;
 }
 
+.list__tasks {
+  visibility: visible;
+}
+
 .task {
   display: flex;
   justify-content: space-between;
