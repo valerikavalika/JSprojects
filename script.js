@@ -149,12 +149,11 @@ function addEnterEventListener(editButtonElement, taskTextElement, cookieKey, ta
                 taskTextElement.removeAttribute("readonly");
                 taskTextElement.focus();
                 editButtonElement.innerText = "Save";
-                
             } else {
-                if(taskTextElement.value == "") {
+                if(taskTextElement.innerText == "") {
                     const deleteChild = document.getElementById(`${cookieKey}`);
                     tasksList.removeChild(deleteChild);
-                    document.cookie = `${cookieKey}=${taskTextElement.value}; expires=` + new Date(2000,0,1).toUTCString();
+                    document.cookie = `${cookieKey}=${taskTextElement.innerText}; expires=` + new Date(2000,0,1).toUTCString();
                 } else {
                     taskTextElement.setAttribute("readonly", "readonly");
                     editButtonElement.innerText = "Edit";
