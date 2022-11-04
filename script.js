@@ -16,20 +16,19 @@ window.addEventListener('load', () =>{
 submitButton.addEventListener('click', (e) => {
     e.preventDefault();
     tasksList.style.visibility = "visible";
-    createNewTask();
+    createNewTask(e);
 });
 formElement.addEventListener('keyup', (e) => {
     e.preventDefault();
     if(e.key == "Enter") {
         e.preventDefault();
         tasksList.style.visibility = "visible";
-        createNewTask();
+        createNewTask(e);
     }
 });
 
-function createNewTask () {
+function createNewTask (e) {
     const task = formInputElement.value;
-    console.log(task);
     if(task == "") {
         return;
     } else {
@@ -88,24 +87,22 @@ function createTaskActionsElement(taskElement) {
     taskElement.appendChild(taskActionsElement);
     return taskActionsElement;
 };
+
 function createTaskTextElement(value, taskContentElement) {
-    const taskTextElement = document.createElement("input");
+    const taskTextElement = document.createElement("textarea");
     taskTextElement.classList.add("task__text");
-    taskTextElement.type = "textarea";
-    taskTextElement.value = value;
-    taskTextElement.setAttribute("readonly", "readonly")
+    taskTextElement.innerHTML = value;
+    taskTextElement.setAttribute("readonly", "readonly");
+    if (value.length < 90) {
+        taskTextElement.setAttribute("rows", "2");
+    } else if (value.length < 180){
+        taskTextElement.setAttribute("rows", "3");
+    } else {
+        taskTextElement.setAttribute("rows", "4");
+    };
     taskContentElement.appendChild(taskTextElement);
     return taskTextElement;
 };
-// function createTaskTextElement(value, taskContentElement) {
-//     const taskTextElement = document.createElement("textarea");
-//     taskTextElement.classList.add("task__text");
-//     taskTextElement.value = value;
-//     taskTextElement.setAttribute("readonly", "readonly")
-//     taskTextElement.setAttribute("rows", "1")
-//     taskContentElement.appendChild(taskTextElement);
-//     return taskTextElement;
-// };
 function createEditButtonElement(taskActionsElement) {
     const editButtonElement = document.createElement("button");
     editButtonElement.classList.add("action__edit");
@@ -146,12 +143,13 @@ function addEditEventListener(editButtonElement, taskTextElement, cookieKey, tas
 function addEnterEventListener(editButtonElement, taskTextElement, cookieKey, taskElement) {
     taskTextElement.addEventListener('keyup', (e) => {
         e.preventDefault();
+        taskInputHeight(taskTextElement, e);
         if(e.key == "Enter") {
-            e.preventDefault();
             if(editButtonElement.innerText.toLowerCase() == "edit") {
                 taskTextElement.removeAttribute("readonly");
                 taskTextElement.focus();
                 editButtonElement.innerText = "Save";
+                
             } else {
                 if(taskTextElement.value == "") {
                     const deleteChild = document.getElementById(`${cookieKey}`);
@@ -173,4 +171,10 @@ function addDeleteEventListener(deleteButtonElement, taskElement, cookieKey) {
         tasksList.removeChild(taskElement);
         document.cookie = `${cookieKey}=${taskElement.value}; expires=` + new Date(2000,0,1).toUTCString();
     });
+};
+
+function taskInputHeight(taskTextElement, e) {
+    taskTextElement.style.height = "auto";
+    const height = e.target.scrollHeight;
+    taskTextElement.style.height = `${height}px`;
 };
