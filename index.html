@@ -4,9 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Page with countries</title>
 </head>
-<body>
-    
+<body class="body">
+        <header class="header">
+            <h1 class="header__title">Where in the world?</h1>
+            <div class="header__search search">
+                <input type="text" class="search__input" placeholder="Type country name here..">
+                <button class="search__button">Search</button>
+            </div>
+        </header>
+        <main class="main">
+            <div class="main__card card">
+                <img class="card__img img" src="/images/Ukraine.png" alt="country-flag">
+                <h3 class="card__name name">Ukraine</h3>
+                <div class="card__population population">Population: 46.000.000</div>
+                <div class="card__region region">Region: Europe</div>
+                <div class="card__capital capital">Capital: Kiev</div>
+            </div>
+        </main>
+    <script src="/script.js"></script>
 </body>
 </html>
