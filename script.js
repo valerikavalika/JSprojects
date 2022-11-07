@@ -3,11 +3,16 @@ const countryInput = document.querySelector('.search__input');
 const mainElement = document.querySelector('.main');
 let countries = [];
 
+const filterButton = document.querySelector('.filter__button');
+const filterMenu = document.querySelector('.filter__menu');
+
 const loadCountries = async () => {
     try {
         const response = await fetch(`https://restcountries.com/v3.1/all`);
         countries = await response.json();
         displayCountries(countries);
+        createUniqueArrayOfRegions(countries);
+        
     } catch (err) {
         console.error(err);
     }
@@ -38,6 +43,35 @@ countryInput.addEventListener("keyup", (e) => {
     displayCountries(filteredCountries);
 });
 
+filterButton.addEventListener('click', () => {
+    isVisible();
+});
 
+function createUniqueArrayOfRegions (countries) {
+    const allRegions = [];
+    const unique = (value, index, self) => {
+        return self.indexOf(value) === index
+    };
+    const mappedRegions = countries.map((country) => {
+        allRegions.push(country.region);
+    });
+    const regions = allRegions.filter(unique);
+    displayRegions(regions);
+};
 
+function displayRegions(regions) {
+    let displayFilter = regions.map(region => {
+        return `<div class="filter__item">${region}</div>`;
+    });
+    displayFilter = displayFilter.join("");
+    filterMenu.innerHTML = displayFilter;
+};
+
+function isVisible () {
+    if(filterMenu.style.display === "none") {
+        filterMenu.style.display = "flex";
+    } else {
+        filterMenu.style.display = "none";
+    }
+};
 loadCountries();

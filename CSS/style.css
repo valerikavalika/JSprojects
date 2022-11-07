@@ -47,7 +47,6 @@ button, input, textarea {
   align-items: center;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  border-bottom: #333 solid 1px;
   box-shadow: 3px 3px rgba(51, 51, 51, 0.168627451);
   background-color: rgb(89, 124, 114);
 }
@@ -69,6 +68,32 @@ button, input, textarea {
   padding: 1rem;
 }
 
+.filter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.filter__button {
+  max-width: 150px;
+  padding: 1rem;
+  margin: 10px;
+  background-color: rgb(89, 124, 114);
+  border-radius: 4px;
+  box-shadow: rgba(51, 51, 51, 0.168627451) 3px 3px;
+}
+.filter__menu {
+  display: flex;
+  flex-wrap: wrap;
+}
+.filter__item {
+  background-color: rgb(89, 124, 114);
+  padding: 1rem;
+  margin: 10px;
+  border-radius: 4px;
+  box-shadow: rgba(51, 51, 51, 0.168627451) 3px 3px;
+}
+
 .main {
   width: 100%;
   display: flex;
@@ -84,8 +109,7 @@ button, input, textarea {
   flex-direction: column;
   width: 300px;
   background-color: azure;
-  border: 1px solid black;
-  box-shadow: rgba(51, 51, 51, 0.168627451) 3px 3px;
+  box-shadow: rgba(51, 51, 51, 0.168627451) 5px 5px;
 }
 .card__img {
   max-width: 100%;
@@ -105,6 +129,14 @@ button, input, textarea {
 .card__capital {
   padding-left: 10px;
   padding-bottom: 15px;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
 }
 
 /*# sourceMappingURL=style.css.map */
