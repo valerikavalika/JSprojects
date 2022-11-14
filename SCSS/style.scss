@@ -1,6 +1,5 @@
 @import "reset";
 @import "variables";
-@import "templates";
 
 .body {
     background-color: $backgroung-color;
@@ -36,9 +35,8 @@
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    // border-bottom: #333 solid 1px;
-    box-shadow: 3px 3px #3333332b;
-    background-color: rgb(89, 124, 114);
+    box-shadow: $box-shadow;
+    background-color: $header-background-color;
     &__title {
         color: $title-text-color;
         flex: 1 1 40%;
@@ -53,20 +51,19 @@
     &__input {
         flex: 1 1 0%;
         height: 2rem;
-        background-color: azure;
+        background-color: $light-mode-card-color;
         padding: 1rem;
     }
 }
 .dark-mode-button {
-    // padding: 1rem;
     width: 40px;
     height: 40px;
-    border: 1px solid black;
+    border: $simple-border;
     border-radius: 50%;
     margin-left: 15px;
-    color: azure;
+    color: $light-mode-card-color;
     font-size: 20px;
-    background-color: rgb(22, 39, 33);
+    background-color: $dark-mode-button-bgc;
 }
 
 .filter {
@@ -78,23 +75,23 @@
         max-width: 150px;
         padding: 1rem;
         margin: 10px;
-        background-color: rgb(89, 124, 114);
+        background-color: $header-background-color;
         border-radius: 4px;
-        box-shadow: #3333332b 3px 3px;
+        box-shadow: $box-shadow;
     }
     &__menu {
         display: none;
         flex-wrap: wrap;
     }
     &__item {
-        background-color: rgb(89, 124, 114);
+        background-color: $header-background-color;
         padding: 1rem;
         margin: 10px;
         border-radius: 4px;
-        box-shadow: #3333332b 3px 3px;
+        box-shadow: $box-shadow;
     }
     &__item:hover {
-        background-color: rgb(69, 95, 88);
+        background-color: $header-background-color_hover;
     }
 }
 
@@ -112,9 +109,8 @@
     display: flex;
     flex-direction: column;
     width: 300px;
-    background-color: azure;
-    // border: 1px solid black;
-    box-shadow: #3333332b 5px 5px;
+    background-color: $light-mode-card-color;
+    box-shadow: $box-shadow;
     &__img {
         max-width: 100%;
         height: 100%;
@@ -140,12 +136,4 @@
 }
 .visible {
     display: block;
-}
-.dark-mode {
-    background-color: black;
-    color: white;
-}
-.card_dark-mode {
-    background-color: rgb(89, 124, 114);
-    color: rgb(40, 43, 42);
 }

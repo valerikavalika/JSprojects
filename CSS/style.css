@@ -47,7 +47,7 @@ button, input, textarea {
   align-items: center;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  box-shadow: 3px 3px rgba(51, 51, 51, 0.168627451);
+  box-shadow: rgba(51, 51, 51, 0.168627451) 3px 3px;
   background-color: rgb(89, 124, 114);
 }
 .header__title {
@@ -123,7 +123,7 @@ button, input, textarea {
   flex-direction: column;
   width: 300px;
   background-color: azure;
-  box-shadow: rgba(51, 51, 51, 0.168627451) 5px 5px;
+  box-shadow: rgba(51, 51, 51, 0.168627451) 3px 3px;
 }
 .card__img {
   max-width: 100%;
@@ -151,16 +151,6 @@ button, input, textarea {
 
 .visible {
   display: block;
-}
-
-.dark-mode {
-  background-color: black;
-  color: white;
-}
-
-.card_dark-mode {
-  background-color: rgb(89, 124, 114);
-  color: rgb(40, 43, 42);
 }
 
 /*# sourceMappingURL=style.css.map */
