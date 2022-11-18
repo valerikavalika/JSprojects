@@ -57,10 +57,33 @@
         </div>
     </section>
     <section class="about">
-        <h2 class="about__section-title">Home / About</h2>
+        <div class="section-title__container container">
+            <h2 class="about__section-title">Home / About</h2>
+        </div>
         <div class="about__container container">
         <h3 class="about__title">Our History</h3>
         <p class="about__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt qui adipisci laudantium architecto perspiciatis laboriosam totam provident ipsam reiciendis accusantium porro laborum quaerat, cumque ipsa nostrum blanditiis veritatis quidem? Voluptates, qui nobis, vel odit enim, quae voluptate cum ipsum eum porro nostrum ut nesciunt commodi voluptatem laborum dolore illum Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem error provident laboriosam illum aliquam cum eaque tenetur, rerum ratione! Sed harum distinctio asperiores commodi mollitia laudantium fuga inventore quibusdam fugit hic voluptas saepe repudiandae, minima, sunt magnam nisi voluptatum. Nulla molestias minima maiores, voluptatibus voluptatem veritatis ea quasi sunt veniam.</p>
+        </div>
+    </section>
+    <section class="shopping-cart">
+        <button class="shopping-cart__close-button">Close</button>
+        <h2 class="shopping-cart__title">Your bag</h2>
+        <div class="shopping-cart__products">
+            <div class="shopping-cart__product shopping-cart-product">
+                <img  class="shopping-cart-product__image" src="./images/furniture.jpg" alt="product-image">
+                <div class="shopping-cart-product__details">
+                    <p class="shopping-cart-product__name">Sofa</p>
+                    <p class="shopping-cart-product__price">$499</p>
+                    <button class="shopping-cart-product__remove-button">remove</button>
+                </div>
+                <div class="shopping-cart__product-count product-count">
+                    <button class="product-count__up-button">up</button>
+                    <h3 class="product-count">1</h3>
+                    <button class="product-count__down-button">down</button>
+                </div>
+            </div>
+            <h2 class="shopping-cart__total">Total: $499</h2>
+            <button class="shopping-cart__checkout-button">Checkout</button>
         </div>
     </section>
     <script src="./script.js"></script>
