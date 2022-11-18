@@ -3,16 +3,14 @@
 @import "container";
 
 .body {
-    background-color: beige;
+    background-color: white;
     font-family: Montserrat;
-    // color: #333;
 }
 .background-image__container {
     position: relative;
 }
 .header {
     &__container {
-    // position: absolute;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -32,6 +30,10 @@
     }
     &__shopping-cart {
         font-size: 25px;
+        box-shadow: 3px 3px #3333335b;
+        border-radius: 50%;
+        padding: 0.6rem;
+        background-color: rgb(77, 68, 68);
     }
     &__shopping-cart:hover {
         color: azure;
@@ -45,7 +47,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    // position: relative;
     width: 100%;
     height: 70vh;
     &__background-image {
@@ -56,9 +57,10 @@
         width: 100%;
         height: 100%;
         z-index: -1;
+        filter: blur(3px);
+        
     }
     &__title {
-        // color: azure;
         font-family: Courgette;
         font-size: 50px;
         margin: 20px 0px;
@@ -70,9 +72,8 @@
     &__button {
         margin: 10px 0px;
         font-size: 18px;
-        // border: solid 1px #333;
         box-shadow: 3px 3px #3333333b;
-        background-color: rgb(117, 101, 89);
+        background-color: rgb(160, 105, 63);
         padding: 0.3rem;
         border-radius: 5px;
     }
@@ -90,12 +91,12 @@
         justify-content: center;
         align-items: center;
         padding: 30px 0px;
-        gap: 30px;
 
     }
     &__title {
         padding: 0.5rem;
         font-size: 20px;
+        text-align:center;
     }
     &__products {
         display: flex;
@@ -104,13 +105,14 @@
         gap: 15px;
     }
     &__product {
-        background-color: rgb(250, 249, 248);
+        background-color: rgb(201, 182, 166);
         padding: 1rem;
         display: flex;
         flex-direction: column;
         width: 400px;
         row-gap: 10px;
         box-shadow: 3px 3px #3333333b;
+        text-align: center;
     }
     &__product:hover {
         background-color: rgb(226, 212, 198);
@@ -118,9 +120,8 @@
     &__button-to-all {
         padding: 0.8rem;
         box-shadow: 3px 3px #3333333b;
-        background-color: rgb(117, 101, 89);
+        background-color: rgb(160, 105, 63);
         border-radius: 5px;
-        // font-size: 18px;
         text-transform: uppercase;
     }
     

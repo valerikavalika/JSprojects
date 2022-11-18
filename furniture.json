@@ -4,7 +4,143 @@
         "name": "Cute gray sofa",
         "company": "Ikea",
         "price": 499, 
-        "category": "sofa", 
+        "category": "sofa",
+        "image": "", 
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 2, 
+        "name": "Sunny yellow sofa",
+        "company": "Mobelix",
+        "price": 899, 
+        "category": "sofa",
+        "image": "",  
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 3, 
+        "name": "Classic black sofa",
+        "company": "Jysk",
+        "price": 799, 
+        "category": "sofa",
+        "image": "",  
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 4, 
+        "name": "Romantic red sofa",
+        "company": "Ikea",
+        "price": 399, 
+        "category": "sofa",
+        "image": "",  
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 5, 
+        "name": "Stylish black chair",
+        "company": "Mobelix",
+        "price": 169.99, 
+        "category": "chair",
+        "image": "",  
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 6, 
+        "name": "Cozy chair",
+        "company": "Jysk",
+        "price": 89.99, 
+        "category": "chair",
+        "image": "", 
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 7, 
+        "name": "Classic table chair",
+        "company": "Ikea",
+        "price": 59.99, 
+        "category": "chair",
+        "image": "",  
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 8, 
+        "name": "Ortopedical chair",
+        "company": "Ikea",
+        "price": 299.99, 
+        "category": "chair",
+        "image": "",  
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 9, 
+        "name": "Computer table",
+        "company": "Mobelix",
+        "price": 169.99, 
+        "category": "table",
+        "image": "",  
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 10, 
+        "name": "Big student table",
+        "company": "Jysk",
+        "price": 189.99, 
+        "category": "table",
+        "image": "",  
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 11, 
+        "name": "Dinner table",
+        "company": "Ikea",
+        "price": 259.99, 
+        "category": "table",
+        "image": "",  
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 12, 
+        "name": "Small table",
+        "company": "Jysk",
+        "price": 99.99, 
+        "category": "table",
+        "image": "",  
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 13, 
+        "name": "Big family bed",
+        "company": "Mobelix",
+        "price": 769.99, 
+        "category": "bed",
+        "image": "",  
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 14, 
+        "name": "Student bed",
+        "company": "Jysk",
+        "price": 189.99, 
+        "category": "bed",
+        "image": "",  
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 15, 
+        "name": "Modern bed",
+        "company": "Ikea",
+        "price": 459.99, 
+        "category": "bed",
+        "image": "",  
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
+    },
+    {
+        "id": 16, 
+        "name": "Children`s bed",
+        "company": "Mobelix",
+        "price": 199.99, 
+        "category": "bed",
+        "image": "",  
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
     }
 ]
