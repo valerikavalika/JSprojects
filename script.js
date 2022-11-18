@@ -1,18 +1,12 @@
-const loadProducts = () => {
-fetch('https://api.escuelajs.co/api/v1/products')
-	.then(response => response.json())
-	.then(response => displayProducts(response))
-	.catch(err => console.error(err));
+let furniture = [];
+const loadFurniture = async () => {
+	try {
+		const response = await fetch('./furniture.json');
+		furniture = await response.json();
+		console.log(furniture);
+	} catch (err) {
+		console.log(err);
+	}
 };
 
-const displayProducts = (data) => {
-	let furniture = [];
-	const allProducts = data.map(object => {
-		if (object.category.name === "Furniture") {
-			furniture.push(object);
-		}
-	});
-	console.log(furniture);
-};
-
-loadProducts();
+loadFurniture();
