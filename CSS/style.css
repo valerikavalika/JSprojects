@@ -47,6 +47,7 @@ ul {
 .body {
   background-color: white;
   font-family: Montserrat;
+  position: relative;
 }
 
 .background-image__container {
@@ -206,6 +207,51 @@ ul {
   background-color: rgb(201, 182, 166);
   width: 100%;
   height: 100px;
+}
+
+.shopping-cart {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 999;
+  height: 100vh;
+  width: 30vw;
+  background-color: white;
+  box-shadow: 0 0 0 999em rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+}
+.shopping-cart__close-button {
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+}
+.shopping-cart__title {
+  font-size: 30px;
+  font-family: Courgette;
+  text-align: center;
+  padding: 1rem;
+}
+.shopping-cart__products {
+  display: flex;
+}
+
+.shopping-cart-product {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+}
+.shopping-cart-product__image-container {
+  width: 200px;
+  height: 100px;
+  padding: 10px;
+}
+.shopping-cart-product__image {
+  max-width: 100%;
+}
+.shopping-cart-product__details {
+  flex: 1 1 0;
 }
 
 /*# sourceMappingURL=style.css.map */
