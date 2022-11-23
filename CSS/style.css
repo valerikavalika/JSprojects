@@ -74,14 +74,15 @@ ul {
   font-family: Courgette;
 }
 .header__shopping-cart {
-  font-size: 25px;
-  box-shadow: 3px 3px rgba(51, 51, 51, 0.3568627451);
-  border-radius: 50%;
-  padding: 0.6rem;
-  background-color: rgb(77, 68, 68);
+  position: relative;
 }
 .header__shopping-cart:hover {
   color: azure;
+}
+.header__shopping-cart-image {
+  font-size: 25px;
+  width: 30px;
+  height: 30px;
 }
 .header__category:hover {
   color: azure;
@@ -302,6 +303,14 @@ ul {
   row-gap: 10px;
 }
 .product-count__button {
+  font-size: 25px;
+}
+
+.products {
+  display: block;
+}
+.products__section-title {
+  padding: 30px 0;
   font-size: 25px;
 }
 

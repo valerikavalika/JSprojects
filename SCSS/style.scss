@@ -31,15 +31,26 @@
         font-family: Courgette;
     }
     &__shopping-cart {
-        font-size: 25px;
-        box-shadow: 3px 3px #3333335b;
-        border-radius: 50%;
-        padding: 0.6rem;
-        background-color: rgb(77, 68, 68);
+        // box-shadow: 3px 3px #3333335b;
+        // border-radius: 50%;
+        // padding: 10px;
+        // background-color: rgb(77, 68, 68);
+        position: relative;
     }
     &__shopping-cart:hover {
         color: azure;
     }
+    &__shopping-cart-image {
+        font-size: 25px;
+        width: 30px;
+        height: 30px;
+    }
+    // &__shopping-cart::after {
+    //     content: "2";
+    //     background-color: goldenrod;
+    //     border-radius: 50%;
+    //     padding: 5px;
+    // }
     &__category:hover {
         color: azure;
     }
@@ -266,6 +277,18 @@
     align-items: center;
     row-gap: 10px;
     &__button {
+        font-size: 25px;
+    }
+}
+
+.products {
+    display: block;
+    // &__container {
+    //     display: flex;
+    //     flex-direction: column;
+    // }
+    &__section-title {
+        padding: 30px 0;
         font-size: 25px;
     }
 }
