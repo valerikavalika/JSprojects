@@ -125,7 +125,7 @@
         </div>
         <div class="products__container container">
             <div class="products__aside-bar aside-bar">
-                <input type="text" class="aside-bar__input">
+                <input type="text" class="aside-bar__input" placeholder="Search here...">
                 <div class="aside-bar__filter_company filter-company filter">
                     <h3 class="filter-company__title filter__title">Companies</h3>
                     <ul class="filter-company__list filter-list">
@@ -136,14 +136,16 @@
                 </div>
                 <div class="aside-bar__filter_price price-filter">
                     <h3 class="price-filter__title filter__title">Price</h3>
-                    <input class="price-filter__range" type="range">
+                    <input class="price-filter__range filter-list" type="range">
                     <p class="price-filter__value">Price: $299</p>
                 </div>
             </div>
             <div class="products__items">
                 <div class="products__item product">
-                    <img class="product__image" src="./images/furniture.jpg" alt="furniture-item">
-                    <p class="product_name">Sofa</p>
+                    <div class="product__image-container">
+                        <img class="product__image" src="./images/furniture.jpg" alt="furniture-item">
+                    </div>
+                    <p class="product__name">Sofa</p>
                     <p class="product__price">$529.99</p>
                     <button class="product__add-to-cart-button">Add to shopping cart</button>
                 </div>
