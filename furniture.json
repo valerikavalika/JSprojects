@@ -23,7 +23,7 @@
         "company": "Jysk",
         "price": 799, 
         "category": "sofa",
-        "image": "./images/classic_black_sofa.png",  
+        "image": "./images/classic_black_sofa.jpg",  
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
     },
     {
@@ -104,7 +104,7 @@
         "company": "Jysk",
         "price": 99.99, 
         "category": "table",
-        "image": "./images.small_table.jfif",  
+        "image": "./images/small_table.jpg",  
         "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, sequi at saepe sit numquam ex?"
     },
     {
