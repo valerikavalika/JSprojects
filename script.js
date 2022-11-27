@@ -22,6 +22,7 @@ const loadFurniture = async () => {
 		const response = await fetch('./furniture.json');
 		furniture = await response.json();
 		displayProductsList(furniture);
+		showHomeSection();
 	} catch (err) {
 		console.log(err);
 	}
@@ -103,5 +104,4 @@ const loadFurniture = async () => {
 	element.style.visibility = "hidden";
  };
  
-
 loadFurniture();
