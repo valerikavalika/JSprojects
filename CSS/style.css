@@ -338,6 +338,7 @@ ul {
   display: flex;
   flex-wrap: wrap;
   flex: 1 1 70%;
+  padding: 10px;
 }
 
 .aside-bar {
@@ -357,7 +358,12 @@ ul {
 .filter-list {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   row-gap: 5px;
+  padding: 0 10px;
+}
+.filter-list__name {
+  margin: 5px 0;
 }
 
 .price-filter__range {

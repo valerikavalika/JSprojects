@@ -1,79 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Online store</title>
-    <link href="https://fonts.googleapis.com/css?family=Courgette:regular" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
-    <link rel="stylesheet" href="./css/style.css">
-</head>
-<body class="body">
+    <link
+      href="https://fonts.googleapis.com/css?family=Courgette:regular"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body class="body">
     <div class="background-image__container">
-    <img class="main-block__background-image" src="./images/main-block__background.jpg" alt="main-block_img">
-    <header class="header">
+      <img
+        class="main-block__background-image"
+        src="./images/main-block__background.jpg"
+        alt="main-block_img"
+      />
+      <header class="header">
         <div class="header__container container">
-        <ul class="header__categories category">
+          <ul class="header__categories category">
             <li class="header__category category__home">Home</li>
             <li class="header__category category__products">Products</li>
             <li class="header__category category__about">About</li>
-        </ul>
-        <h2 class="header__title">Comfy</h2>
-        <a>
-        <button class="header__shopping-cart">
-            <svg class="header__shopping-cart-image" stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M922.9 701.9H327.4l29.9-60.9 496.8-.9c16.8 0 31.2-12 34.2-28.6l68.8-385.1c1.8-10.1-.9-20.5-7.5-28.4a34.99 34.99 0 0 0-26.6-12.5l-632-2.1-5.4-25.4c-3.4-16.2-18-28-34.6-28H96.5a35.3 35.3 0 1 0 0 70.6h125.9L246 312.8l58.1 281.3-74.8 122.1a34.96 34.96 0 0 0-3 36.8c6 11.9 18.1 19.4 31.5 19.4h62.8a102.43 102.43 0 0 0-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7h161.1a102.43 102.43 0 0 0-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7H923c19.4 0 35.3-15.8 35.3-35.3a35.42 35.42 0 0 0-35.4-35.2zM305.7 253l575.8 1.9-56.4 315.8-452.3.8L305.7 253zm96.9 612.7c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 0 1-31.6 31.6zm325.1 0c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 0 1-31.6 31.6z"></path></svg>
-        </button>
-        </a>
+          </ul>
+          <h2 class="header__title">Comfy</h2>
+          <a>
+            <button class="header__shopping-cart">
+              <svg
+                class="header__shopping-cart-image"
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M922.9 701.9H327.4l29.9-60.9 496.8-.9c16.8 0 31.2-12 34.2-28.6l68.8-385.1c1.8-10.1-.9-20.5-7.5-28.4a34.99 34.99 0 0 0-26.6-12.5l-632-2.1-5.4-25.4c-3.4-16.2-18-28-34.6-28H96.5a35.3 35.3 0 1 0 0 70.6h125.9L246 312.8l58.1 281.3-74.8 122.1a34.96 34.96 0 0 0-3 36.8c6 11.9 18.1 19.4 31.5 19.4h62.8a102.43 102.43 0 0 0-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7h161.1a102.43 102.43 0 0 0-20.6 61.7c0 56.6 46 102.6 102.6 102.6s102.6-46 102.6-102.6c0-22.3-7.4-44-20.6-61.7H923c19.4 0 35.3-15.8 35.3-35.3a35.42 35.42 0 0 0-35.4-35.2zM305.7 253l575.8 1.9-56.4 315.8-452.3.8L305.7 253zm96.9 612.7c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 0 1-31.6 31.6zm325.1 0c-17.4 0-31.6-14.2-31.6-31.6 0-17.4 14.2-31.6 31.6-31.6s31.6 14.2 31.6 31.6a31.6 31.6 0 0 1-31.6 31.6z"
+                ></path>
+              </svg>
+            </button>
+          </a>
         </div>
-    </header>
-    <section class="main-block">
+      </header>
+      <section class="main-block">
         <div class="main-block__container container">
-            <h1 class="main-block__title">Rest, Relax, Unwind</h1>
-            <h3 class="main-block__slogan">Embrace your choices - we do</h3>
-            <button class="main-block__button">Shop now</button>
+          <h1 class="main-block__title">Rest, Relax, Unwind</h1>
+          <h3 class="main-block__slogan">Embrace your choices - we do</h3>
+          <button class="main-block__button">Shop now</button>
         </div>
-    </section>
-</div>
-     <section class="featured-block featured">
-        <div class="featured__container container">
-            <h3 class="featured__title">Featured</h3>
-            <div class="featured__products">
-                <div class="featured__product">
-                    <img class="featured__image" src="./images/furniture.jpg" alt="furniture-item">
-                    <p class="featured__name">Sofa</p>
-                    <p class="featured__price">$529.99</p>
-                </div>
-                <div class="featured__product">
-                    <img class="featured__image" src="./images/furniture.jpg" alt="furniture-item">
-                    <p class="featured__name">Coffee-table</p>
-                    <p class="featured__price">$129.99</p>
-                </div>
-                <div class="featured__product">
-                    <img class="featured__image" src="./images/furniture.jpg" alt="furniture-item">
-                    <p class="featured__name">Pillow</p>
-                    <p class="featured__price">$29.99</p>
-                </div>
-            </div>
-            <button class="featured__button-to-all">All products</button>
+      </section>
+    </div>
+    <section class="featured-block featured">
+      <div class="featured__container container">
+        <h3 class="featured__title">Featured</h3>
+        <div class="featured__products">
+          <div class="featured__product">
+            <img
+              class="featured__image"
+              src="./images/furniture.jpg"
+              alt="furniture-item"
+            />
+            <p class="featured__name">Sofa</p>
+            <p class="featured__price">$529.99</p>
+          </div>
+          <div class="featured__product">
+            <img
+              class="featured__image"
+              src="./images/furniture.jpg"
+              alt="furniture-item"
+            />
+            <p class="featured__name">Coffee-table</p>
+            <p class="featured__price">$129.99</p>
+          </div>
+          <div class="featured__product">
+            <img
+              class="featured__image"
+              src="./images/furniture.jpg"
+              alt="furniture-item"
+            />
+            <p class="featured__name">Pillow</p>
+            <p class="featured__price">$29.99</p>
+          </div>
         </div>
+        <button class="featured__button-to-all">All products</button>
+      </div>
     </section>
     <section class="about">
-        <div class="section-title__container container">
-            <h2 class="about__section-title">Home / About</h2>
-        </div>
-        <div class="about__container container">
+      <div class="section-title__container container">
+        <h2 class="about__section-title">Home / About</h2>
+      </div>
+      <div class="about__container container">
         <h3 class="about__title">Our History</h3>
-        <p class="about__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt qui adipisci laudantium architecto perspiciatis laboriosam totam provident ipsam reiciendis accusantium porro laborum quaerat, cumque ipsa nostrum blanditiis veritatis quidem? Voluptates, qui nobis, vel odit enim, quae voluptate cum ipsum eum porro nostrum ut nesciunt commodi voluptatem laborum dolore illum Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem error provident laboriosam illum aliquam cum eaque tenetur, rerum ratione! Sed harum distinctio asperiores commodi mollitia laudantium fuga inventore quibusdam fugit hic voluptas saepe repudiandae, minima, sunt magnam nisi voluptatum. Nulla molestias minima maiores, voluptatibus voluptatem veritatis ea quasi sunt veniam.</p>
-        </div>
+        <p class="about__text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt qui
+          adipisci laudantium architecto perspiciatis laboriosam totam provident
+          ipsam reiciendis accusantium porro laborum quaerat, cumque ipsa
+          nostrum blanditiis veritatis quidem? Voluptates, qui nobis, vel odit
+          enim, quae voluptate cum ipsum eum porro nostrum ut nesciunt commodi
+          voluptatem laborum dolore illum Lorem ipsum dolor sit amet,
+          consectetur adipisicing elit. Rem error provident laboriosam illum
+          aliquam cum eaque tenetur, rerum ratione! Sed harum distinctio
+          asperiores commodi mollitia laudantium fuga inventore quibusdam fugit
+          hic voluptas saepe repudiandae, minima, sunt magnam nisi voluptatum.
+          Nulla molestias minima maiores, voluptatibus voluptatem veritatis ea
+          quasi sunt veniam.
+        </p>
+      </div>
     </section>
     <section class="shopping-cart">
-        <button class="shopping-cart__close-button">
-            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M685.4 354.8c0-4.4-3.6-8-8-8l-66 .3L512 465.6l-99.3-118.4-66.1-.3c-4.4 0-8 3.5-8 8 0 1.9.7 3.7 1.9 5.2l130.1 155L340.5 670a8.32 8.32 0 0 0-1.9 5.2c0 4.4 3.6 8 8 8l66.1-.3L512 564.4l99.3 118.4 66 .3c4.4 0 8-3.5 8-8 0-1.9-.7-3.7-1.9-5.2L553.5 515l130.1-155c1.2-1.4 1.8-3.3 1.8-5.2z"></path><path d="M512 65C264.6 65 64 265.6 64 513s200.6 448 448 448 448-200.6 448-448S759.4 65 512 65zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg>
-        </button>
-        <h2 class="shopping-cart__title">Your bag</h2>
-        <div class="shopping-cart__products">
-            <!-- <div class="shopping-cart__product shopping-cart-product">
+      <button class="shopping-cart__close-button">
+        <svg
+          stroke="currentColor"
+          fill="currentColor"
+          stroke-width="0"
+          viewBox="0 0 1024 1024"
+          height="1em"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M685.4 354.8c0-4.4-3.6-8-8-8l-66 .3L512 465.6l-99.3-118.4-66.1-.3c-4.4 0-8 3.5-8 8 0 1.9.7 3.7 1.9 5.2l130.1 155L340.5 670a8.32 8.32 0 0 0-1.9 5.2c0 4.4 3.6 8 8 8l66.1-.3L512 564.4l99.3 118.4 66 .3c4.4 0 8-3.5 8-8 0-1.9-.7-3.7-1.9-5.2L553.5 515l130.1-155c1.2-1.4 1.8-3.3 1.8-5.2z"
+          ></path>
+          <path
+            d="M512 65C264.6 65 64 265.6 64 513s200.6 448 448 448 448-200.6 448-448S759.4 65 512 65zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+          ></path>
+        </svg>
+      </button>
+      <h2 class="shopping-cart__title">Your bag</h2>
+      <div class="shopping-cart__products">
+        <!-- <div class="shopping-cart__product shopping-cart-product">
                 <div class="shopping-cart-product__image-container">
                 <img  class="shopping-cart-product__image" src="./images/furniture.jpg" alt="product-image">
                 </div>
@@ -94,35 +157,51 @@
                     </button>
                 </div>
             </div> -->
-        </div>
-        <footer class="shopping-cart__footer">
+      </div>
+      <footer class="shopping-cart__footer">
         <h2 class="shopping-cart__total">Total: $0</h2>
         <button class="shopping-cart__checkout-button">Checkout</button>
-    </footer>
+      </footer>
     </section>
     <section class="products">
-        <div class="section-title__container container">
-            <h2 class="products__section-title">Home / Products</h2>
-        </div>
-        <div class="products__container container">
-            <div class="products__aside-bar aside-bar">
-                <input type="text" class="aside-bar__input" placeholder="Search here...">
-                <div class="aside-bar__filter_company filter-company filter">
-                    <h3 class="filter-company__title filter__title">Companies</h3>
-                    <ul class="filter-company__list filter-list">
-                        <li class="filter-company__company filter-list__name">Ikea</li>
-                        <li class="filter-company__company filter-list__name">Mobelix</li>
-                        <li class="filter-company__company filter-list__name">Jysk</li>
-                    </ul>
-                </div>
-                <div class="aside-bar__filter_price price-filter">
-                    <h3 class="price-filter__title filter__title">Price</h3>
-                    <input class="price-filter__range filter-list" type="range">
-                    <p class="price-filter__value">Price: $299</p>
-                </div>
+      <div class="section-title__container container">
+        <h2 class="products__section-title">Home / Products</h2>
+      </div>
+      <div class="products__container container">
+        <div class="products__aside-bar aside-bar">
+          <input
+            type="text"
+            class="aside-bar__input"
+            placeholder="Search here..."
+          />
+          <div class="aside-bar__filter_company filter-company filter">
+            <h3 class="filter-company__title filter__title">Companies</h3>
+            <div class="filter-company__list filter-list">
+              <!-- <button class="filter-company__company filter-list__name">
+                All
+              </button> -->
+              <!-- <button class="filter-company__company filter-list__name">
+                Mobelix
+              </button>
+              <button class="filter-company__company filter-list__name">
+                Jysk
+              </button> -->
             </div>
-            <div class="products__items">
-                <!-- <div class="products__item product">
+          </div>
+          <div class="aside-bar__filter_price price-filter">
+            <h3 class="price-filter__title filter__title">Price</h3>
+            <input
+              class="price-filter__range filter-list"
+              type="range"
+              min="0"
+              value="50"
+              max="100"
+            />
+            <p class="price-filter__value">Price: $299</p>
+          </div>
+        </div>
+        <div class="products__items">
+          <!-- <div class="products__item product">
                     <div class="product__image-container">
                         <img class="product__image" src="./images/furniture.jpg" alt="furniture-item">
                     </div>
@@ -130,9 +209,9 @@
                     <p class="product__price">$529.99</p>
                     <button class="product__add-to-cart-button">Add to shopping cart</button>
                 </div> -->
-            </div>
         </div>
+      </div>
     </section>
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>

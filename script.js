@@ -1,40 +1,53 @@
-const productItemsElement = document.querySelector('.products__items');
+const productItemsElement = document.querySelector(".products__items");
 
-const homeButtonElement = document.querySelector('.category__home');
-const productsButtonElement = document.querySelector('.category__products');
-const aboutButtonElement = document.querySelector('.category__about');
+const homeButtonElement = document.querySelector(".category__home");
+const productsButtonElement = document.querySelector(".category__products");
+const aboutButtonElement = document.querySelector(".category__about");
 
-const aboutSection = document.querySelector('.about');
-const productsSection = document.querySelector('.products');
-const featuredSection = document.querySelector('.featured');
-const mainBlockSection = document.querySelector('.main-block');
-const mainBlockBackgroundImage = document.querySelector('.main-block__background-image');
-const shoppingCartElement = document.querySelector('.shopping-cart');
-const shoppingCartButton = document.querySelector('.header__shopping-cart');
-const shoppingCartCloseButton = document.querySelector('.shopping-cart__close-button');
-const mainBlockButton = document.querySelector('.main-block__button');
-const featuredBlockButton = document.querySelector('.featured__button-to-all');
-const shoppingCartItemsElement = document.querySelector('.shopping-cart__products');
-const shoppingCartSubtotalElement = document.querySelector('.shopping-cart__total');
+const aboutSection = document.querySelector(".about");
+const productsSection = document.querySelector(".products");
+const featuredSection = document.querySelector(".featured");
+const mainBlockSection = document.querySelector(".main-block");
+const mainBlockBackgroundImage = document.querySelector(
+  ".main-block__background-image"
+);
+
+const shoppingCartElement = document.querySelector(".shopping-cart");
+const shoppingCartButton = document.querySelector(".header__shopping-cart");
+const shoppingCartCloseButton = document.querySelector(
+  ".shopping-cart__close-button"
+);
+const mainBlockButton = document.querySelector(".main-block__button");
+const featuredBlockButton = document.querySelector(".featured__button-to-all");
+const shoppingCartItemsElement = document.querySelector(
+  ".shopping-cart__products"
+);
+const shoppingCartSubtotalElement = document.querySelector(
+  ".shopping-cart__total"
+);
+
+const searchElement = document.querySelector(".aside-bar__input");
+const companyFilterElement = document.querySelector(".filter-list");
 
 let furniture = [];
 let cart = JSON.parse(localStorage.getItem("CART")) || [];
 updateCart();
 
 const loadFurniture = async () => {
-	try {
-		const response = await fetch('./furniture.json');
-		furniture = await response.json();
-		displayProductsList(furniture);
-		showHomeSection();
-	} catch (err) {
-		console.log(err);
-	}
+  try {
+    const response = await fetch("./furniture.json");
+    furniture = await response.json();
+    displayProductsList(furniture);
+    displayCompaniesFilter(furniture);
+    showHomeSection();
+  } catch (err) {
+    console.log(err);
+  }
 };
 
- const displayProductsList = (furniture) => {
-	let furnitureItems = furniture.map(item => {
-		return ` <div class="products__item product">
+const displayProductsList = (furniture) => {
+  let furnitureItems = furniture.map((item) => {
+    return ` <div class="products__item product">
 		<div class="product__image-container">
 			<img class="product__image" src="${item.image}">
 		</div>
@@ -42,46 +55,104 @@ const loadFurniture = async () => {
 		<p class="product__price">$${item.price}</p>
 		<button onclick="addToCart(${item.id})" class="product__add-to-cart-button">Add to shopping cart</button>
 	</div>`;
+  });
+  furnitureItems = furnitureItems.join("");
+  productItemsElement.innerHTML = furnitureItems;
+};
+const displayCompaniesFilter = (furniture) => {
+	const companies = createUniqueCompanyArray(furniture);
+  let companiesList = companies.map((company) => {
+	
+    return `<button class="filter-company__company filter-list__name">
+		${company}
+	  </button>`;
+  });
+  companiesList = companiesList.join("");
+  companyFilterElement.innerHTML = companiesList;
+  companyFilterElement.addEventListener('click', (e) => {
+	const element = e.target;
+	if(element.classList.contains('filter-list__name')){
+		filterByCompany(element, furniture);
+	}
 	});
-	furnitureItems = furnitureItems.join("");
-	productItemsElement.innerHTML = furnitureItems;
- };
- 
- function addToCart(id) {
-	if(cart.some((item) => item.id === id)){
-		changeNumberOfUnits("plus", id);
-	} else {
-		const item = furniture.find((product) => product.id === id);
-		cart.push({
-			...item,
-			numberOfUnits: 1, 
-		});
-	};
-	updateCart();
- };
+};
 
- function removeItemFromCart(id) {
-	cart = cart.filter((item) => item.id !== id);
-	updateCart();
- };
+function createUniqueCompanyArray(furniture) {
+	const companies = [
+		"All",
+		...new Set(
+		  furniture.map((item) => {
+			return `${item.company}`;
+		  })
+		),
+	  ];
+	  return companies;
+};
 
- function updateCart() {
-	renderCartItems();
-	renderSubtotal();
-	localStorage.setItem("CART", JSON.stringify(cart));
- };
+function filterByCompany(element, furniture) {
+	let filteredFurnitureByCompany = [];
+		if(element.innerText === 'All'){
+			displayProductsList(furniture);
+		} else {
+			filteredFurnitureByCompany = furniture.filter(product => product.company === element.innerText);
+			displayProductsList(filteredFurnitureByCompany);
+		}
+};
 
- function renderSubtotal() {
-	let totalPrice = 0;
-	cart.forEach((item) => {
-		totalPrice += item.price * item.numberOfUnits;
-	});
-	shoppingCartSubtotalElement.innerHTML = `Total: $${totalPrice.toFixed(2)}`;
- };
+searchElement.addEventListener("keyup", () => {
+  const value = searchElement.value;
+  if (value) {
+    const filteredFurniture = furniture.filter((product) => {
+      const { name } = product;
+      name.toLowerCase();
+      if (name.includes(value)) {
+        return product;
+      }
+    });
+    displayProductsList(filteredFurniture);
+    if (filteredFurniture.length < 1) {
+      productItemsElement.innerHTML = `<div class="products__items" > There is no product with this name..</div>`;
+    }
+  } else {
+    displayProductsList(furniture);
+  }
+});
 
- function renderCartItems() {
-	let productCartItems = cart.map(item => {
-		return `<div class="shopping-cart__product shopping-cart-product">
+function addToCart(id) {
+  if (cart.some((item) => item.id === id)) {
+    changeNumberOfUnits("plus", id);
+  } else {
+    const item = furniture.find((product) => product.id === id);
+    cart.push({
+      ...item,
+      numberOfUnits: 1,
+    });
+  }
+  updateCart();
+}
+
+function removeItemFromCart(id) {
+  cart = cart.filter((item) => item.id !== id);
+  updateCart();
+}
+
+function updateCart() {
+  renderCartItems();
+  renderSubtotal();
+  localStorage.setItem("CART", JSON.stringify(cart));
+}
+
+function renderSubtotal() {
+  let totalPrice = 0;
+  cart.forEach((item) => {
+    totalPrice += item.price * item.numberOfUnits;
+  });
+  shoppingCartSubtotalElement.innerHTML = `Total: $${totalPrice.toFixed(2)}`;
+}
+
+function renderCartItems() {
+  let productCartItems = cart.map((item) => {
+    return `<div class="shopping-cart__product shopping-cart-product">
 		<div class="shopping-cart-product__image-container">
 		<img  class="shopping-cart-product__image" src="${item.image}" alt="product-image">
 		</div>
@@ -101,89 +172,89 @@ const loadFurniture = async () => {
 				<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M862 465.3h-81c-4.6 0-9 2-12.1 5.5L550 723.1V160c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v563.1L255.1 470.8c-3-3.5-7.4-5.5-12.1-5.5h-81c-6.8 0-10.5 8.1-6 13.2L487.9 861a31.96 31.96 0 0 0 48.3 0L868 478.5c4.5-5.2.8-13.2-6-13.2z"></path></svg>
 			</button>
 		</div>
-	</div>`
-	});
-	productCartItems = productCartItems.join("");
-	shoppingCartItemsElement.innerHTML = productCartItems;
- };
+	</div>`;
+  });
+  productCartItems = productCartItems.join("");
+  shoppingCartItemsElement.innerHTML = productCartItems;
+}
 
- function changeNumberOfUnits(action, id) {
-	cart = cart.map((item) => {
-		let numberOfUnits = item.numberOfUnits;
-		if(item.id === id) {
-			if(action === "minus" && numberOfUnits > 1){
-				numberOfUnits--;
-			} else if (action === "plus"){
-				numberOfUnits++;
-			}
-		}
-		return {
-			...item,
-			numberOfUnits,
-		};
-	});
-	updateCart();
- };
+function changeNumberOfUnits(action, id) {
+  cart = cart.map((item) => {
+    let numberOfUnits = item.numberOfUnits;
+    if (item.id === id) {
+      if (action === "minus" && numberOfUnits > 1) {
+        numberOfUnits--;
+      } else if (action === "plus") {
+        numberOfUnits++;
+      }
+    }
+    return {
+      ...item,
+      numberOfUnits,
+    };
+  });
+  updateCart();
+}
 
- homeButtonElement.addEventListener('click', () => {
-	showHomeSection();
- });
- productsButtonElement.addEventListener('click', () => {
-	showProductsSection();
- });
- aboutButtonElement.addEventListener('click', () => {
-	showAboutSection();
- });
+homeButtonElement.addEventListener("click", () => {
+  showHomeSection();
+});
+productsButtonElement.addEventListener("click", () => {
+  showProductsSection();
+});
+aboutButtonElement.addEventListener("click", () => {
+  showAboutSection();
+});
 
- const showHomeSection = () => {
-	isVisibleFlex(mainBlockSection);
-	isVisibleBlock(featuredSection);
-	isNotDisplayed(aboutSection);
-	isNotDisplayed(productsSection);
-	isVisible(mainBlockBackgroundImage);
- };
- const showProductsSection = () => {
-	isVisibleBlock(productsSection);
-	isNotDisplayed(featuredSection);
-	isNotDisplayed(aboutSection);
-	isNotDisplayed(mainBlockSection);
-	isNotVisible(mainBlockBackgroundImage);
- };
- const showAboutSection = () => {
-	isVisibleBlock(aboutSection);
-	isNotDisplayed(featuredSection);
-	isNotDisplayed(productsSection);
-	isNotDisplayed(mainBlockSection);
-	isNotVisible(mainBlockBackgroundImage);
- };
+const showHomeSection = () => {
+  isVisibleFlex(mainBlockSection);
+  isVisibleBlock(featuredSection);
+  isNotDisplayed(aboutSection);
+  isNotDisplayed(productsSection);
+  isVisible(mainBlockBackgroundImage);
+};
+const showProductsSection = () => {
+  isVisibleBlock(productsSection);
+  isNotDisplayed(featuredSection);
+  isNotDisplayed(aboutSection);
+  isNotDisplayed(mainBlockSection);
+  isNotVisible(mainBlockBackgroundImage);
+};
+const showAboutSection = () => {
+  isVisibleBlock(aboutSection);
+  isNotDisplayed(featuredSection);
+  isNotDisplayed(productsSection);
+  isNotDisplayed(mainBlockSection);
+  isNotVisible(mainBlockBackgroundImage);
+};
 
- shoppingCartButton.addEventListener('click', () => {
-	isVisibleFlex(shoppingCartElement);
- });
- shoppingCartCloseButton.addEventListener('click', () => {
-	isNotDisplayed(shoppingCartElement);
- });
- mainBlockButton.addEventListener('click', () => {
-	showProductsSection();
- });
- featuredBlockButton.addEventListener('click', () => {
-	showProductsSection();
- });
+shoppingCartButton.addEventListener("click", () => {
+  isVisibleFlex(shoppingCartElement);
+});
+shoppingCartCloseButton.addEventListener("click", () => {
+  isNotDisplayed(shoppingCartElement);
+});
+mainBlockButton.addEventListener("click", () => {
+  showProductsSection();
+});
+featuredBlockButton.addEventListener("click", () => {
+  showProductsSection();
+});
 
- const isNotDisplayed = (element) => {
-	element.style.display = "none";
- };
- const isVisibleBlock = (element) => {
-	element.style.display = "block";
- };
- const isVisibleFlex = (element) => {
-	element.style.display = "flex";
- };
- const isVisible = (element) => {
-	element.style.visibility = "visible";
- };
- const isNotVisible = (element) => {
-	element.style.visibility = "hidden";
- };
- 
+const isNotDisplayed = (element) => {
+  element.style.display = "none";
+};
+const isVisibleBlock = (element) => {
+  element.style.display = "block";
+};
+const isVisibleFlex = (element) => {
+  element.style.display = "flex";
+};
+const isVisible = (element) => {
+  element.style.visibility = "visible";
+};
+const isNotVisible = (element) => {
+  element.style.visibility = "hidden";
+};
+
 loadFurniture();
