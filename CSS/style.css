@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-button, input, textarea {
+button, textarea {
   outline: none;
   border: none;
   background: none;
@@ -368,7 +368,6 @@ ul {
 
 .price-filter__range {
   padding: 0.7rem;
-  appearance: auto;
 }
 
 .product {

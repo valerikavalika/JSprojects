@@ -28,6 +28,9 @@ const shoppingCartSubtotalElement = document.querySelector(
 
 const searchElement = document.querySelector(".aside-bar__input");
 const companyFilterElement = document.querySelector(".filter-list");
+const priceInputElement = document.querySelector('.price-filter__range');
+const priceValueElement = document.querySelector('.price-filter__value');
+
 
 let furniture = [];
 let cart = JSON.parse(localStorage.getItem("CART")) || [];
@@ -39,6 +42,7 @@ const loadFurniture = async () => {
     furniture = await response.json();
     displayProductsList(furniture);
     displayCompaniesFilter(furniture);
+	displayPriceFilter(furniture);
     showHomeSection();
   } catch (err) {
     console.log(err);
@@ -59,10 +63,10 @@ const displayProductsList = (furniture) => {
   furnitureItems = furnitureItems.join("");
   productItemsElement.innerHTML = furnitureItems;
 };
+
 const displayCompaniesFilter = (furniture) => {
 	const companies = createUniqueCompanyArray(furniture);
   let companiesList = companies.map((company) => {
-	
     return `<button class="filter-company__company filter-list__name">
 		${company}
 	  </button>`;
@@ -75,6 +79,30 @@ const displayCompaniesFilter = (furniture) => {
 		filterByCompany(element, furniture);
 	}
 	});
+};
+
+const displayPriceFilter = (furniture) =>  {
+	let maxPrice = furniture.map((product) => product.price);
+	maxPrice = Math.max(...maxPrice);
+	maxPrice = Math.ceil(maxPrice);
+	priceInputElement.max = maxPrice;
+	priceInputElement.min = 0;
+	priceInputElement.value = maxPrice;
+	priceValueElement.textContent = `Price: $${maxPrice}`;
+	priceInputElement.addEventListener('input', function(){
+		filterByPrice(furniture);
+	});
+};
+
+function filterByPrice(furniture) {
+	const value = parseInt(priceInputElement.value);
+	priceValueElement.textContent = `Price: $${value}`;
+	let filteredProductsByPrice = furniture.filter((product) => product.price <= value);
+		if(filteredProductsByPrice < 1){
+			productItemsElement.innerHTML = `<div class="products__items" > There is no product with this filter..</div>`;
+		} else {
+			displayProductsList(filteredProductsByPrice);
+		}
 };
 
 function createUniqueCompanyArray(furniture) {
