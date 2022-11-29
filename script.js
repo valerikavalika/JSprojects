@@ -31,7 +31,6 @@ const companyFilterElement = document.querySelector(".filter-list");
 const priceInputElement = document.querySelector('.price-filter__range');
 const priceValueElement = document.querySelector('.price-filter__value');
 
-
 let furniture = [];
 let cart = JSON.parse(localStorage.getItem("CART")) || [];
 updateCart();
@@ -41,8 +40,9 @@ const loadFurniture = async () => {
     const response = await fetch("./furniture.json");
     furniture = await response.json();
     displayProductsList(furniture);
-    displayCompaniesFilter(furniture);
-	displayPriceFilter(furniture);
+    // displayCompaniesFilter(furniture);
+	  displayPriceFilter(furniture);
+    displayCompanyCounter(furniture, "");
     showHomeSection();
   } catch (err) {
     console.log(err);
@@ -64,22 +64,22 @@ const displayProductsList = (furniture) => {
   productItemsElement.innerHTML = furnitureItems;
 };
 
-const displayCompaniesFilter = (furniture) => {
-	const companies = createUniqueCompanyArray(furniture);
-  let companiesList = companies.map((company) => {
-    return `<button class="filter-company__company filter-list__name">
-		${company}
-	  </button>`;
-  });
-  companiesList = companiesList.join("");
-  companyFilterElement.innerHTML = companiesList;
-  companyFilterElement.addEventListener('click', (e) => {
-	const element = e.target;
-	if(element.classList.contains('filter-list__name')){
-		filterByCompany(element, furniture);
-	}
-	});
-};
+// const displayCompaniesFilter = (furniture) => {
+// 	const companies = createUniqueCompanyArray(furniture);
+//   let companiesList = companies.map((company) => {
+//     return `<button class="filter-company__company filter-list__name">
+// 		${company}<span class= filter-company__company-counter id="${company}"></span>
+// 	  </button>`;
+//   });
+//   companiesList = companiesList.join("");
+//   companyFilterElement.innerHTML = companiesList;
+//   companyFilterElement.addEventListener('click', (e) => {
+// 	const element = e.target;
+// 	if(element.classList.contains('filter-list__name')){
+// 		filterByCompany(element, furniture);
+// 	}
+// 	});
+// };
 
 const displayPriceFilter = (furniture) =>  {
 	let maxPrice = furniture.map((product) => product.price);
@@ -88,20 +88,69 @@ const displayPriceFilter = (furniture) =>  {
 	priceInputElement.max = maxPrice;
 	priceInputElement.min = 0;
 	priceInputElement.value = maxPrice;
+  sessionStorage.setItem("filterByPrice", maxPrice);
 	priceValueElement.textContent = `Price: $${maxPrice}`;
 	priceInputElement.addEventListener('input', function(){
 		filterByPrice(furniture);
 	});
 };
 
-function filterByPrice(furniture) {
+const displayCompanyCounter = (furniture, filteredFurniture) => {
+  let companies = [];
+  let all = 0;
+  const count = {};
+  if(filteredFurniture === ""){
+    companies = furniture.map(item => item.company);
+  } else {
+    companies = filteredFurniture.map(item => item.company);
+  }
+  const uniqueCompanies = createUniqueCompanyArray(furniture);
+  const elements = uniqueCompanies.map(company => document.getElementById(company));
+  uniqueCompanies.forEach(element => {
+    count[element] = (count[element] || 0);
+  });
+  companies.forEach(element => {
+    count[element] = (count[element] || 0) + 1;
+  });
+  for (const value of Object.values(count)) {
+    all += value;
+  }
+  count.All = all;
+  let allButtons = [];
+  for (let key in count){
+    let buttons = [];
+    const first = `<button class="filter-company__company filter-list__name" id="${key}">
+		${key}`;
+    buttons.push(first);
+    const second = `<span class= filter-company__company-counter>(${count[key]})</span>
+	  </button>`;
+    buttons.push(second);
+    buttons = buttons.join("");
+    allButtons.push(buttons);
+  }
+  allButtons = allButtons.join("");
+  companyFilterElement.innerHTML = allButtons;
+  companyFilterElement.addEventListener('click', (e) => {
+	const element = e.target;
+	if(element.classList.contains('filter-list__name')){
+		filterByCompany(element, furniture);
+	}
+	});
+};
+
+
+const filterByPrice = (furniture) => {
 	const value = parseInt(priceInputElement.value);
-	priceValueElement.textContent = `Price: $${value}`;
+	priceValueElement.innerHTML = `Price: $${value}`;
 	let filteredProductsByPrice = furniture.filter((product) => product.price <= value);
 		if(filteredProductsByPrice < 1){
 			productItemsElement.innerHTML = `<div class="products__items" > There is no product with this filter..</div>`;
+      sessionStorage.setItem("filterByPrice", `${value}`);
+      displayCompanyCounter(furniture, filteredProductsByPrice)
 		} else {
-			displayProductsList(filteredProductsByPrice);
+      sessionStorage.setItem("filterByPrice", `${value}`);
+      checkAllFilters(furniture);
+      displayCompanyCounter(furniture, filteredProductsByPrice);
 		}
 };
 
@@ -117,14 +166,27 @@ function createUniqueCompanyArray(furniture) {
 	  return companies;
 };
 
-function filterByCompany(element, furniture) {
+const filterByCompany = (element, furniture) => {
 	let filteredFurnitureByCompany = [];
-		if(element.innerText === 'All'){
-			displayProductsList(furniture);
+		if(element.id === 'All'){
+      sessionStorage.setItem("filterByCompany", 'All');
+      checkAllFilters(furniture);
 		} else {
-			filteredFurnitureByCompany = furniture.filter(product => product.company === element.innerText);
-			displayProductsList(filteredFurnitureByCompany);
+      filteredFurnitureByCompany = furniture.filter(item => item.company === element.id);
+      sessionStorage.setItem("filterByCompany", `${element.id}`);
+      checkAllFilters(furniture);
 		}
+};
+const checkAllFilters = (furniture) => {
+  const filterByCompany = sessionStorage.getItem("filterByCompany");
+  const filterByPrice = sessionStorage.getItem("filterByPrice");
+  if(filterByCompany === 'All'){
+    const filteredProducts = furniture.filter(item => item.price <= filterByPrice);
+    displayProductsList(filteredProducts);
+  } else {
+    const filteredProducts = furniture.filter(item => item.company === filterByCompany && item.price <= filterByPrice);
+    displayProductsList(filteredProducts);
+  }
 };
 
 searchElement.addEventListener("keyup", () => {
@@ -145,6 +207,8 @@ searchElement.addEventListener("keyup", () => {
     displayProductsList(furniture);
   }
 });
+
+
 
 function addToCart(id) {
   if (cart.some((item) => item.id === id)) {
