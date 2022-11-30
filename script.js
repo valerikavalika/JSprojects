@@ -17,6 +17,7 @@ const shoppingCartButton = document.querySelector(".header__shopping-cart");
 const shoppingCartCloseButton = document.querySelector(
   ".shopping-cart__close-button"
 );
+const shoppingCartRemoveAllButton = document.querySelector('.shopping-cart__remove-all-button');
 const mainBlockButton = document.querySelector(".main-block__button");
 const featuredBlockButton = document.querySelector(".featured__button-to-all");
 const shoppingCartItemsElement = document.querySelector(
@@ -30,6 +31,7 @@ const searchElement = document.querySelector(".aside-bar__input");
 const companyFilterElement = document.querySelector(".filter-list");
 const priceInputElement = document.querySelector('.price-filter__range');
 const priceValueElement = document.querySelector('.price-filter__value');
+
 
 let furniture = [];
 let cart = JSON.parse(localStorage.getItem("CART")) || [];
@@ -64,22 +66,15 @@ const displayProductsList = (furniture) => {
   productItemsElement.innerHTML = furnitureItems;
 };
 
-// const displayCompaniesFilter = (furniture) => {
-// 	const companies = createUniqueCompanyArray(furniture);
-//   let companiesList = companies.map((company) => {
-//     return `<button class="filter-company__company filter-list__name">
-// 		${company}<span class= filter-company__company-counter id="${company}"></span>
-// 	  </button>`;
-//   });
-//   companiesList = companiesList.join("");
-//   companyFilterElement.innerHTML = companiesList;
-//   companyFilterElement.addEventListener('click', (e) => {
-// 	const element = e.target;
-// 	if(element.classList.contains('filter-list__name')){
-// 		filterByCompany(element, furniture);
-// 	}
-// 	});
-// };
+shoppingCartRemoveAllButton.addEventListener('click', () => {
+  removeAllFromCart();
+});
+
+function removeAllFromCart() {
+  localStorage.removeItem("CART");
+  cart=[];
+  updateCart();
+};
 
 const displayPriceFilter = (furniture) =>  {
 	let maxPrice = furniture.map((product) => product.price);

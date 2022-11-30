@@ -227,6 +227,17 @@ ul {
   background-color: white;
   box-shadow: 0 0 0 999em rgba(0, 0, 0, 0.8);
 }
+.shopping-cart__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.shopping-cart__remove-all-button {
+  padding: 1rem;
+}
+.shopping-cart__remove-all-button:hover {
+  color: tomato;
+}
 .shopping-cart__close-button {
   width: 50px;
   height: 50px;
