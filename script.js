@@ -50,19 +50,10 @@ const loadFurniture = async () => {
   }
 };
 
+//display 3 random products as featured
 function displayFeaturedProducts(furniture) {
-  let arrayOfRandoms = [];
   const randomNumber = getRandomNumber(furniture);
-  arrayOfRandoms.push(randomNumber);
-  if (randomNumber <= furniture.length && randomNumber > 1) {
-    for (let i = 1; i < 3; i++) {
-      arrayOfRandoms.push(randomNumber - i);
-    }
-  } else if (randomNumber <= 1) {
-    for (let i = 1; i < 3; i++) {
-      arrayOfRandoms.push(randomNumber + i);
-    }
-  }
+  const arrayOfRandoms = createRandomArray(randomNumber);
   let randomProducts = arrayOfRandoms.map((random) => {
     return `<div class="featured__product">
     <div class="featured__image-container">
@@ -80,12 +71,30 @@ function displayFeaturedProducts(furniture) {
   featuredProductsElement.innerHTML = randomProducts;
 }
 
+// function returns random number -- min:0, max: products from json length
 function getRandomNumber(furniture) {
   let max = furniture.length;
   const randomNumber = Math.floor(Math.random() * max);
   return randomNumber;
 }
 
+//function creates an array(3) of randoms depending on number passed 
+function createRandomArray(randomNumber) {
+  const arrayOfRandoms = [];
+  arrayOfRandoms.push(randomNumber);
+  if (randomNumber <= furniture.length && randomNumber > 1) {
+    for (let i = 1; i < 3; i++) {
+      arrayOfRandoms.push(randomNumber - i);
+    }
+  } else if (randomNumber <= 1) {
+    for (let i = 1; i < 3; i++) {
+      arrayOfRandoms.push(randomNumber + i);
+    }
+  }
+  return arrayOfRandoms;
+};
+
+//display all products in products list 
 const displayProductsList = (furniture) => {
   let furnitureItems = furniture.map((item) => {
     return ` <div class="products__item product">
@@ -101,16 +110,7 @@ const displayProductsList = (furniture) => {
   productItemsElement.innerHTML = furnitureItems;
 };
 
-shoppingCartRemoveAllButton.addEventListener("click", () => {
-  removeAllFromCart();
-});
-
-function removeAllFromCart() {
-  localStorage.removeItem("CART");
-  cart = [];
-  updateCart();
-}
-
+//display price filter/ set price filter at max value
 const displayPriceFilter = (furniture) => {
   let maxPrice = furniture.map((product) => product.price);
   maxPrice = Math.max(...maxPrice);
@@ -120,86 +120,14 @@ const displayPriceFilter = (furniture) => {
   priceInputElement.value = maxPrice;
   sessionStorage.setItem("filterByPrice", maxPrice);
   priceValueElement.textContent = `Price: $${maxPrice}`;
-  priceInputElement.addEventListener("input", function () {
-    filterByPrice(furniture);
-  });
 };
 
-const displayCompanyCounter = (furniture, filteredFurniture) => {
-  let companies = [];
-  let all = 0;
-  const count = {};
-  if (filteredFurniture === "") {
-    companies = furniture.map((item) => item.company);
-  } else {
-    companies = filteredFurniture.map((item) => item.company);
-  }
-  const uniqueCompanies = createUniqueCompanyArray(furniture);
-  const elements = uniqueCompanies.map((company) =>
-    document.getElementById(company)
-  );
-  uniqueCompanies.forEach((element) => {
-    count[element] = count[element] || 0;
-  });
-  companies.forEach((element) => {
-    count[element] = (count[element] || 0) + 1;
-  });
-  for (const value of Object.values(count)) {
-    all += value;
-  }
-  count.All = all;
-  let allButtons = [];
-  for (let key in count) {
-    let buttons = [];
-    const first = `<button class="filter-company__company filter-list__name" id="${key}">
-		${key}`;
-    buttons.push(first);
-    const second = `<span class= filter-company__company-counter>(${count[key]})</span>
-	  </button>`;
-    buttons.push(second);
-    buttons = buttons.join("");
-    allButtons.push(buttons);
-  }
-  allButtons = allButtons.join("");
-  companyFilterElement.innerHTML = allButtons;
-  companyFilterElement.addEventListener("click", (e) => {
-    const element = e.target;
-    if (element.classList.contains("filter-list__name")) {
-      filterByCompany(element, furniture);
-    }
-  });
-};
+//add price listener 
+priceInputElement.addEventListener("input", function () {
+  filterByPrice(furniture);
+});
 
-function checkTheCounter() {
-  const buttonCollection = companyFilterElement.children;
-  let countObject = {};
-  for (let button of buttonCollection) {
-    countObject[button.id] = countObject[button.id] || 0;
-    let count = button.children[0].innerText.split("");
-    count = count[1];
-    countObject[button.id] = count;
-  }
-  let entries = Object.entries(countObject);
-  for (let i = 0; i < entries.length; i++) {
-    if (entries[i][1] === "0") {
-      disableButton(entries[i][0]);
-    } else {
-      activateButton(entries[i][0]);
-    }
-  }
-}
-
-function disableButton(id) {
-  const element = document.getElementById(id);
-  element.disabled = true;
-  element.classList.add("disabled");
-}
-function activateButton(id) {
-  const element = document.getElementById(id);
-  element.disabled = false;
-  element.classList.remove("disabled");
-}
-
+//filter depending on price passed
 const filterByPrice = (furniture) => {
   const value = parseInt(priceInputElement.value);
   priceValueElement.innerHTML = `Price: $${value}`;
@@ -219,6 +147,107 @@ const filterByPrice = (furniture) => {
   }
 };
 
+// display all companies, show number of products next to company
+const displayCompanyCounter = (furniture, filteredFurniture) => {
+  //create an array from all companies with duplicates
+  const companies = createCompaniesArray(furniture, filteredFurniture);
+  //create unique array of companies
+  const uniqueCompanies = createUniqueCompanyArray(furniture);
+  //get all company buttons
+  const elements = uniqueCompanies.map((company) =>
+    document.getElementById(company)
+  );
+  //create an object with companies as keys and 0 as values
+  const count = {};
+  uniqueCompanies.forEach((element) => {
+    count[element] = count[element] || 0;
+  });
+  //increase a value in object by 1 when duplicate in array found
+  companies.forEach((element) => {
+    count[element] = (count[element] || 0) + 1;
+  });
+  //get sum of all values in object and set it as value to 'All' key 
+  let all = 0;
+  for (const value of Object.values(count)) {
+    all += value;
+  }
+  count.All = all;
+  //create an array of all company filter buttons
+  let allButtons = [];
+  for (let key in count) {
+    let buttons = [];
+    const first = `<button class="filter-company__company filter-list__name" id="${key}">
+		${key}`;
+    buttons.push(first);
+    const second = `<span class= filter-company__company-counter>(${count[key]})</span>
+	  </button>`;
+    buttons.push(second);
+    buttons = buttons.join("");
+    allButtons.push(buttons);
+  }
+  allButtons = allButtons.join("");
+  companyFilterElement.innerHTML = allButtons;
+};
+
+//add listener to parent of company buttons
+companyFilterElement.addEventListener("click", (e) => {
+  const element = e.target;
+  if (element.classList.contains("filter-list__name")) {
+    filterByCompany(element, furniture);
+  }
+});
+
+//checks the company counter
+function checkTheCounter() {
+  //get all buttons 
+  const buttonCollection = companyFilterElement.children;
+  //create an object of all companies as keys and actuall count of products as values
+  let countObject = {};
+  for (let button of buttonCollection) {
+    //add to object all keys and values 0
+    countObject[button.id] = countObject[button.id] || 0;
+    // add to object all values
+    let count = button.children[0].innerText.split("");
+    count = count[1];
+    countObject[button.id] = count;
+  }
+  //check the value of key - if 0 - disable a button with key
+  let entries = Object.entries(countObject);
+  for (let i = 0; i < entries.length; i++) {
+    if (entries[i][1] === "0") {
+      disableButton(entries[i][0]);
+    } else {
+      activateButton(entries[i][0]);
+    }
+  }
+}
+
+//dispable the button
+function disableButton(id) {
+  const element = document.getElementById(id);
+  element.disabled = true;
+  element.classList.add("disabled");
+}
+
+//activate the button
+function activateButton(id) {
+  const element = document.getElementById(id);
+  element.disabled = false;
+  element.classList.remove("disabled");
+}
+
+//return an array from all companies with duplicates
+function createCompaniesArray(furniture, filteredFurniture) {
+  let companies = [];
+  if (filteredFurniture === "") {
+    companies = furniture.map((item) => item.company);
+  } else {
+    companies = filteredFurniture.map((item) => item.company);
+  }
+  return companies;
+};
+
+//return an array from all companies - only unique values
 function createUniqueCompanyArray(furniture) {
   const companies = [
     "All",
@@ -231,6 +260,7 @@ function createUniqueCompanyArray(furniture) {
   return companies;
 }
 
+//filter by company
 const filterByCompany = (element, furniture) => {
   let filteredFurnitureByCompany = [];
   if (element.id === "All") {
@@ -244,6 +274,8 @@ const filterByCompany = (element, furniture) => {
     checkAllFilters(furniture);
   }
 };
+
+//check all the values of all filters 
 const checkAllFilters = (furniture) => {
   const filterByCompany = sessionStorage.getItem("filterByCompany");
   const filterByPrice = sessionStorage.getItem("filterByPrice");
@@ -260,6 +292,7 @@ const checkAllFilters = (furniture) => {
   }
 };
 
+// search input logic
 searchElement.addEventListener("keyup", () => {
   const value = searchElement.value;
   if (value) {
@@ -283,6 +316,7 @@ searchElement.addEventListener("keyup", () => {
   }
 });
 
+//shoping cart
 function addToCart(id) {
   if (cart.some((item) => item.id === id)) {
     changeNumberOfUnits("plus", id);
@@ -294,26 +328,13 @@ function addToCart(id) {
     });
   }
   updateCart();
-}
-
-function removeItemFromCart(id) {
-  cart = cart.filter((item) => item.id !== id);
-  updateCart();
-}
+};
 
 function updateCart() {
   renderCartItems();
   renderSubtotal();
   localStorage.setItem("CART", JSON.stringify(cart));
-}
-
-function renderSubtotal() {
-  let totalPrice = 0;
-  cart.forEach((item) => {
-    totalPrice += item.price * item.numberOfUnits;
-  });
-  shoppingCartSubtotalElement.innerHTML = `Total: $${totalPrice.toFixed(2)}`;
-}
+};
 
 function renderCartItems() {
   let productCartItems = cart.map((item) => {
@@ -341,7 +362,30 @@ function renderCartItems() {
   });
   productCartItems = productCartItems.join("");
   shoppingCartItemsElement.innerHTML = productCartItems;
-}
+};
+
+function renderSubtotal() {
+  let totalPrice = 0;
+  cart.forEach((item) => {
+    totalPrice += item.price * item.numberOfUnits;
+  });
+  shoppingCartSubtotalElement.innerHTML = `Total: $${totalPrice.toFixed(2)}`;
+};
+
+function removeItemFromCart(id) {
+  cart = cart.filter((item) => item.id !== id);
+  updateCart();
+};
+
+shoppingCartRemoveAllButton.addEventListener("click", () => {
+  removeAllFromCart();
+});
+
+function removeAllFromCart() {
+  localStorage.removeItem("CART");
+  cart = [];
+  updateCart();
+};
 
 function changeNumberOfUnits(action, id) {
   cart = cart.map((item) => {
@@ -359,8 +403,11 @@ function changeNumberOfUnits(action, id) {
     };
   });
   updateCart();
-}
+};
 
+//SPA viewing page logic
+
+//add listeners to all header buttons
 homeButtonElement.addEventListener("click", () => {
   showHomeSection();
 });
@@ -370,7 +417,22 @@ productsButtonElement.addEventListener("click", () => {
 aboutButtonElement.addEventListener("click", () => {
   showAboutSection();
 });
+shoppingCartButton.addEventListener("click", () => {
+  isVisibleFlex(shoppingCartElement);
+});
+shoppingCartCloseButton.addEventListener("click", () => {
+  isNotDisplayed(shoppingCartElement);
+});
 
+//add listeners to all buttons on the main page
+mainBlockButton.addEventListener("click", () => {
+  showProductsSection();
+});
+featuredBlockButton.addEventListener("click", () => {
+  showProductsSection();
+});
+
+//show sections depending on button clicked
 const showHomeSection = () => {
   isVisibleFlex(mainBlockSection);
   isVisibleBlock(featuredSection);
@@ -393,19 +455,7 @@ const showAboutSection = () => {
   isNotVisible(mainBlockBackgroundImage);
 };
 
-shoppingCartButton.addEventListener("click", () => {
-  isVisibleFlex(shoppingCartElement);
-});
-shoppingCartCloseButton.addEventListener("click", () => {
-  isNotDisplayed(shoppingCartElement);
-});
-mainBlockButton.addEventListener("click", () => {
-  showProductsSection();
-});
-featuredBlockButton.addEventListener("click", () => {
-  showProductsSection();
-});
-
+//visibility functions
 const isNotDisplayed = (element) => {
   element.style.display = "none";
 };
