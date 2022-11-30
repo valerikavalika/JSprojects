@@ -31,10 +31,6 @@
         font-family: Courgette;
     }
     &__shopping-cart {
-        // box-shadow: 3px 3px #3333335b;
-        // border-radius: 50%;
-        // padding: 10px;
-        // background-color: rgb(77, 68, 68);
         position: relative;
     }
     &__shopping-cart:hover {
@@ -45,12 +41,6 @@
         width: 30px;
         height: 30px;
     }
-    // &__shopping-cart::after {
-    //     content: "2";
-    //     background-color: goldenrod;
-    //     border-radius: 50%;
-    //     padding: 5px;
-    // }
     &__category:hover {
         color: rgb(160, 105, 63);
     }
@@ -146,9 +136,14 @@
     &__button-to-all:hover {
         background-color: rgb(87, 56, 36);
     }
-
+    &__image-container {
+        width: 100%;
+        height: 250px;
+    }
     &__image {
-        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
     &__name {
         font-weight: 700;

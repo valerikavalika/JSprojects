@@ -11,6 +11,7 @@ const mainBlockSection = document.querySelector(".main-block");
 const mainBlockBackgroundImage = document.querySelector(
   ".main-block__background-image"
 );
+const featuredProductsElement = document.querySelector('.featured__products');
 
 const shoppingCartElement = document.querySelector(".shopping-cart");
 const shoppingCartButton = document.querySelector(".header__shopping-cart");
@@ -41,14 +42,49 @@ const loadFurniture = async () => {
   try {
     const response = await fetch("./furniture.json");
     furniture = await response.json();
+    displayFeaturedProducts(furniture);
     displayProductsList(furniture);
-    // displayCompaniesFilter(furniture);
 	  displayPriceFilter(furniture);
     displayCompanyCounter(furniture, "");
     showHomeSection();
   } catch (err) {
     console.log(err);
   }
+};
+function displayFeaturedProducts(furniture) {
+  let arrayOfRandoms = [];
+  const randomNumber = getRandomNumber(furniture);
+  arrayOfRandoms.push(randomNumber);
+  if(randomNumber <= furniture.length && randomNumber > 1){
+    for(let i=1; i < 3; i++){
+      arrayOfRandoms.push(randomNumber - i);
+    }
+  } else if(randomNumber <= 1){
+    for(let i=1; i < 3; i++){
+      arrayOfRandoms.push(randomNumber + i);
+    }
+  }
+  let randomProducts = arrayOfRandoms.map(random => {
+    return`<div class="featured__product">
+    <div class="featured__image-container">
+    <img
+      class="featured__image"
+      src="${furniture[random].image}"
+      alt="furniture-item"
+    />
+    </div>
+    <p class="featured__name">${furniture[random].name}</p>
+    <p class="featured__price">$${furniture[random].price}</p>
+  </div>`;
+  });
+  randomProducts = randomProducts.join("");
+  featuredProductsElement.innerHTML = randomProducts;
+};
+
+function getRandomNumber(furniture) {
+  let max = furniture.length;
+  const randomNumber = Math.floor(Math.random() * max);
+  return randomNumber;
 };
 
 const displayProductsList = (furniture) => {

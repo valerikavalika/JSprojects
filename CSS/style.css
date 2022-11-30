@@ -177,8 +177,14 @@ ul {
 .featured__button-to-all:hover {
   background-color: rgb(87, 56, 36);
 }
+.featured__image-container {
+  width: 100%;
+  height: 250px;
+}
 .featured__image {
-  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .featured__name {
   font-weight: 700;
