@@ -1,0 +1,38 @@
+.main-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 70vh;
+    &__background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        filter: blur(3px);
+        visibility: visible;
+    }
+    &__title {
+        font-family: $hand-written-font;
+        font-size: 50px;
+        margin: 20px 0px;
+    }
+    &__slogan {
+        margin: 10px 0px;
+        font-size: 20px;
+    }
+    &__button {
+        margin: 10px 0px;
+        font-size: 18px;
+        box-shadow: $box-shadow;
+        background-color: $main-color;
+        padding: 0.3rem;
+        border-radius: 5px;
+    }
+    &__button:hover {
+        background-color: $main-color-darker;
+    }
+}

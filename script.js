@@ -1,71 +1,70 @@
+//get products list element
 const productItemsElement = document.querySelector(".products__items");
 
+//get header elements
 const homeButtonElement = document.querySelector(".category__home");
 const productsButtonElement = document.querySelector(".category__products");
 const aboutButtonElement = document.querySelector(".category__about");
 
+//get main sections elements
 const aboutSection = document.querySelector(".about");
 const productsSection = document.querySelector(".products");
 const featuredSection = document.querySelector(".featured");
 const mainBlockSection = document.querySelector(".main-block");
-const mainBlockBackgroundImage = document.querySelector(
-  ".main-block__background-image"
-);
-const featuredProductsElement = document.querySelector('.featured__products');
+const mainBlockBackgroundImage = document.querySelector(".main-block__background-image");
+const featuredProductsElement = document.querySelector(".featured__products");
 
+//get shopping cart elements
 const shoppingCartElement = document.querySelector(".shopping-cart");
 const shoppingCartButton = document.querySelector(".header__shopping-cart");
-const shoppingCartCloseButton = document.querySelector(
-  ".shopping-cart__close-button"
-);
-const shoppingCartRemoveAllButton = document.querySelector('.shopping-cart__remove-all-button');
+const shoppingCartCloseButton = document.querySelector(".shopping-cart__close-button");
+const shoppingCartRemoveAllButton = document.querySelector(".shopping-cart__remove-all-button");
 const mainBlockButton = document.querySelector(".main-block__button");
 const featuredBlockButton = document.querySelector(".featured__button-to-all");
-const shoppingCartItemsElement = document.querySelector(
-  ".shopping-cart__products"
-);
-const shoppingCartSubtotalElement = document.querySelector(
-  ".shopping-cart__total"
-);
+const shoppingCartItemsElement = document.querySelector(".shopping-cart__products");
+const shoppingCartSubtotalElement = document.querySelector(".shopping-cart__total");
 
+//get filter elements
 const searchElement = document.querySelector(".aside-bar__input");
 const companyFilterElement = document.querySelector(".filter-list");
-const priceInputElement = document.querySelector('.price-filter__range');
-const priceValueElement = document.querySelector('.price-filter__value');
+const priceInputElement = document.querySelector(".price-filter__range");
+const priceValueElement = document.querySelector(".price-filter__value");
 
-
+//main variables
 let furniture = [];
 let cart = JSON.parse(localStorage.getItem("CART")) || [];
 updateCart();
 
+//initialisation of the page
 const loadFurniture = async () => {
   try {
     const response = await fetch("./furniture.json");
     furniture = await response.json();
     displayFeaturedProducts(furniture);
     displayProductsList(furniture);
-	  displayPriceFilter(furniture);
+    displayPriceFilter(furniture);
     displayCompanyCounter(furniture, "");
     showHomeSection();
   } catch (err) {
     console.log(err);
   }
 };
+
 function displayFeaturedProducts(furniture) {
   let arrayOfRandoms = [];
   const randomNumber = getRandomNumber(furniture);
   arrayOfRandoms.push(randomNumber);
-  if(randomNumber <= furniture.length && randomNumber > 1){
-    for(let i=1; i < 3; i++){
+  if (randomNumber <= furniture.length && randomNumber > 1) {
+    for (let i = 1; i < 3; i++) {
       arrayOfRandoms.push(randomNumber - i);
     }
-  } else if(randomNumber <= 1){
-    for(let i=1; i < 3; i++){
+  } else if (randomNumber <= 1) {
+    for (let i = 1; i < 3; i++) {
       arrayOfRandoms.push(randomNumber + i);
     }
   }
-  let randomProducts = arrayOfRandoms.map(random => {
-    return`<div class="featured__product">
+  let randomProducts = arrayOfRandoms.map((random) => {
+    return `<div class="featured__product">
     <div class="featured__image-container">
     <img
       class="featured__image"
@@ -79,13 +78,13 @@ function displayFeaturedProducts(furniture) {
   });
   randomProducts = randomProducts.join("");
   featuredProductsElement.innerHTML = randomProducts;
-};
+}
 
 function getRandomNumber(furniture) {
   let max = furniture.length;
   const randomNumber = Math.floor(Math.random() * max);
   return randomNumber;
-};
+}
 
 const displayProductsList = (furniture) => {
   let furnitureItems = furniture.map((item) => {
@@ -102,45 +101,47 @@ const displayProductsList = (furniture) => {
   productItemsElement.innerHTML = furnitureItems;
 };
 
-shoppingCartRemoveAllButton.addEventListener('click', () => {
+shoppingCartRemoveAllButton.addEventListener("click", () => {
   removeAllFromCart();
 });
 
 function removeAllFromCart() {
   localStorage.removeItem("CART");
-  cart=[];
+  cart = [];
   updateCart();
-};
+}
 
-const displayPriceFilter = (furniture) =>  {
-	let maxPrice = furniture.map((product) => product.price);
-	maxPrice = Math.max(...maxPrice);
-	maxPrice = Math.ceil(maxPrice);
-	priceInputElement.max = maxPrice;
-	priceInputElement.min = 0;
-	priceInputElement.value = maxPrice;
+const displayPriceFilter = (furniture) => {
+  let maxPrice = furniture.map((product) => product.price);
+  maxPrice = Math.max(...maxPrice);
+  maxPrice = Math.ceil(maxPrice);
+  priceInputElement.max = maxPrice;
+  priceInputElement.min = 0;
+  priceInputElement.value = maxPrice;
   sessionStorage.setItem("filterByPrice", maxPrice);
-	priceValueElement.textContent = `Price: $${maxPrice}`;
-	priceInputElement.addEventListener('input', function(){
-		filterByPrice(furniture);
-	});
+  priceValueElement.textContent = `Price: $${maxPrice}`;
+  priceInputElement.addEventListener("input", function () {
+    filterByPrice(furniture);
+  });
 };
 
 const displayCompanyCounter = (furniture, filteredFurniture) => {
   let companies = [];
   let all = 0;
   const count = {};
-  if(filteredFurniture === ""){
-    companies = furniture.map(item => item.company);
+  if (filteredFurniture === "") {
+    companies = furniture.map((item) => item.company);
   } else {
-    companies = filteredFurniture.map(item => item.company);
+    companies = filteredFurniture.map((item) => item.company);
   }
   const uniqueCompanies = createUniqueCompanyArray(furniture);
-  const elements = uniqueCompanies.map(company => document.getElementById(company));
-  uniqueCompanies.forEach(element => {
-    count[element] = (count[element] || 0);
+  const elements = uniqueCompanies.map((company) =>
+    document.getElementById(company)
+  );
+  uniqueCompanies.forEach((element) => {
+    count[element] = count[element] || 0;
   });
-  companies.forEach(element => {
+  companies.forEach((element) => {
     count[element] = (count[element] || 0) + 1;
   });
   for (const value of Object.values(count)) {
@@ -148,7 +149,7 @@ const displayCompanyCounter = (furniture, filteredFurniture) => {
   }
   count.All = all;
   let allButtons = [];
-  for (let key in count){
+  for (let key in count) {
     let buttons = [];
     const first = `<button class="filter-company__company filter-list__name" id="${key}">
 		${key}`;
@@ -161,92 +162,100 @@ const displayCompanyCounter = (furniture, filteredFurniture) => {
   }
   allButtons = allButtons.join("");
   companyFilterElement.innerHTML = allButtons;
-  companyFilterElement.addEventListener('click', (e) => {
-	const element = e.target;
-	if(element.classList.contains('filter-list__name')){
-		filterByCompany(element, furniture);
-	}
-	});
+  companyFilterElement.addEventListener("click", (e) => {
+    const element = e.target;
+    if (element.classList.contains("filter-list__name")) {
+      filterByCompany(element, furniture);
+    }
+  });
 };
 
 function checkTheCounter() {
   const buttonCollection = companyFilterElement.children;
   let countObject = {};
-  for(let button of buttonCollection) {
-    countObject[button.id] = (countObject[button.id] || 0);
-    let count = button.children[0].innerText.split('');
+  for (let button of buttonCollection) {
+    countObject[button.id] = countObject[button.id] || 0;
+    let count = button.children[0].innerText.split("");
     count = count[1];
-    countObject[button.id] = count; 
+    countObject[button.id] = count;
   }
   let entries = Object.entries(countObject);
-  for(let i = 0; i < entries.length; i++){
-    if(entries[i][1] === '0'){
+  for (let i = 0; i < entries.length; i++) {
+    if (entries[i][1] === "0") {
       disableButton(entries[i][0]);
     } else {
       activateButton(entries[i][0]);
     }
-  };
-};
+  }
+}
 
 function disableButton(id) {
   const element = document.getElementById(id);
   element.disabled = true;
   element.classList.add("disabled");
-};
+}
 function activateButton(id) {
   const element = document.getElementById(id);
   element.disabled = false;
   element.classList.remove("disabled");
-};
+}
 
 const filterByPrice = (furniture) => {
-	const value = parseInt(priceInputElement.value);
-	priceValueElement.innerHTML = `Price: $${value}`;
-	let filteredProductsByPrice = furniture.filter((product) => product.price <= value);
-		if(filteredProductsByPrice < 1){
-			productItemsElement.innerHTML = `<div class="products__items" > There is no product with this filter..</div>`;
-      sessionStorage.setItem("filterByPrice", `${value}`);
-      displayCompanyCounter(furniture, filteredProductsByPrice);
-      checkTheCounter();
-		} else {
-      sessionStorage.setItem("filterByPrice", `${value}`);
-      checkAllFilters(furniture);
-      displayCompanyCounter(furniture, filteredProductsByPrice);
-      checkTheCounter();
-		}
+  const value = parseInt(priceInputElement.value);
+  priceValueElement.innerHTML = `Price: $${value}`;
+  let filteredProductsByPrice = furniture.filter(
+    (product) => product.price <= value
+  );
+  if (filteredProductsByPrice < 1) {
+    productItemsElement.innerHTML = `<div class="products__items" > There is no product with this filter..</div>`;
+    sessionStorage.setItem("filterByPrice", `${value}`);
+    displayCompanyCounter(furniture, filteredProductsByPrice);
+    checkTheCounter();
+  } else {
+    sessionStorage.setItem("filterByPrice", `${value}`);
+    checkAllFilters(furniture);
+    displayCompanyCounter(furniture, filteredProductsByPrice);
+    checkTheCounter();
+  }
 };
 
 function createUniqueCompanyArray(furniture) {
-	const companies = [
-		"All",
-		...new Set(
-		  furniture.map((item) => {
-			return `${item.company}`;
-		  })
-		),
-	  ];
-	  return companies;
-};
+  const companies = [
+    "All",
+    ...new Set(
+      furniture.map((item) => {
+        return `${item.company}`;
+      })
+    ),
+  ];
+  return companies;
+}
 
 const filterByCompany = (element, furniture) => {
-	let filteredFurnitureByCompany = [];
-		if(element.id === 'All'){
-      sessionStorage.setItem("filterByCompany", 'All');
-      checkAllFilters(furniture);
-		} else {
-      filteredFurnitureByCompany = furniture.filter(item => item.company === element.id);
-      sessionStorage.setItem("filterByCompany", `${element.id}`);
-      checkAllFilters(furniture);
-		}
+  let filteredFurnitureByCompany = [];
+  if (element.id === "All") {
+    sessionStorage.setItem("filterByCompany", "All");
+    checkAllFilters(furniture);
+  } else {
+    filteredFurnitureByCompany = furniture.filter(
+      (item) => item.company === element.id
+    );
+    sessionStorage.setItem("filterByCompany", `${element.id}`);
+    checkAllFilters(furniture);
+  }
 };
 const checkAllFilters = (furniture) => {
   const filterByCompany = sessionStorage.getItem("filterByCompany");
   const filterByPrice = sessionStorage.getItem("filterByPrice");
-  if(filterByCompany === 'All'){
-    const filteredProducts = furniture.filter(item => item.price <= filterByPrice);
+  if (filterByCompany === "All") {
+    const filteredProducts = furniture.filter(
+      (item) => item.price <= filterByPrice
+    );
     displayProductsList(filteredProducts);
   } else {
-    const filteredProducts = furniture.filter(item => item.company === filterByCompany && item.price <= filterByPrice);
+    const filteredProducts = furniture.filter(
+      (item) => item.company === filterByCompany && item.price <= filterByPrice
+    );
     displayProductsList(filteredProducts);
   }
 };
@@ -273,8 +282,6 @@ searchElement.addEventListener("keyup", () => {
     checkTheCounter();
   }
 });
-
-
 
 function addToCart(id) {
   if (cart.some((item) => item.id === id)) {

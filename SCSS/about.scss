@@ -1,0 +1,23 @@
+.about {
+    display: block;
+    &__container {
+    display: flex;
+    flex-direction: column;
+    }
+    &__section-title {
+        padding: 30px 0;
+        font-size: 25px;
+        
+    }
+    &__title {
+        text-align: center;
+        padding: 30px 0;
+    }
+    &__title::before {
+       @extend %title-before;
+    }
+    &__text {
+        text-align: justify;
+        padding: 10px 0;
+    }
+}

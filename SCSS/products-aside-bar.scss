@@ -1,0 +1,32 @@
+
+.aside-bar {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    &__input {
+        border: $light-border;
+        padding: 1rem;
+    }
+}
+
+.filter {
+    &__title {
+        font-weight: 700;
+        padding: 0.5rem 0;
+    }
+    &-list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        row-gap: 5px;
+        padding: 0 10px;
+    }
+    &-list__name {
+        margin: 5px 0;
+    }
+}
+.price-filter {
+    &__range {
+        padding: 0.7rem;
+    }
+}

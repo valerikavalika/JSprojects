@@ -44,6 +44,11 @@ ul {
     padding: 0 calc(50vw - 590px);
   }
 }
+.about__title::before, .featured__title::before {
+  content: "/ ";
+  color: rgb(190, 97, 25);
+}
+
 .body {
   background-color: white;
   font-family: Montserrat;
@@ -53,6 +58,16 @@ ul {
 
 .background-image__container {
   position: relative;
+}
+
+.section-title__container {
+  background-color: rgb(201, 182, 166);
+  width: 100%;
+  height: 100px;
+}
+
+.disabled {
+  color: rgb(161, 158, 158);
 }
 
 .header__container {
@@ -144,10 +159,6 @@ ul {
   font-size: 20px;
   text-align: center;
 }
-.featured__title::before {
-  content: "/ ";
-  color: rgb(190, 97, 25);
-}
 .featured__products {
   display: flex;
   flex-wrap: wrap;
@@ -206,19 +217,9 @@ ul {
   text-align: center;
   padding: 30px 0;
 }
-.about__title::before {
-  content: "/ ";
-  color: rgb(190, 97, 25);
-}
 .about__text {
   text-align: justify;
   padding: 10px 0;
-}
-
-.section-title__container {
-  background-color: rgb(201, 182, 166);
-  width: 100%;
-  height: 100px;
 }
 
 .shopping-cart {
@@ -364,35 +365,6 @@ ul {
   padding: 10px;
 }
 
-.aside-bar {
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-}
-.aside-bar__input {
-  border: 1px solid rgba(51, 51, 51, 0.2941176471);
-  padding: 1rem;
-}
-
-.filter__title {
-  font-weight: 700;
-  padding: 0.5rem 0;
-}
-.filter-list {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  row-gap: 5px;
-  padding: 0 10px;
-}
-.filter-list__name {
-  margin: 5px 0;
-}
-
-.price-filter__range {
-  padding: 0.7rem;
-}
-
 .product {
   padding: 1rem;
   display: flex;
@@ -431,8 +403,33 @@ ul {
   background-color: rgb(201, 182, 166);
 }
 
-.disabled {
-  color: rgb(161, 158, 158);
+.aside-bar {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+.aside-bar__input {
+  border: 1px solid rgba(51, 51, 51, 0.2941176471);
+  padding: 1rem;
+}
+
+.filter__title {
+  font-weight: 700;
+  padding: 0.5rem 0;
+}
+.filter-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 5px;
+  padding: 0 10px;
+}
+.filter-list__name {
+  margin: 5px 0;
+}
+
+.price-filter__range {
+  padding: 0.7rem;
 }
 
 /*# sourceMappingURL=style.css.map */

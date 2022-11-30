@@ -1,0 +1,34 @@
+.header {
+    &__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 25px;
+    padding-bottom: 20px;
+    font-size: 20px;
+    }
+    &__categories {
+        display: flex;
+        column-gap: 30px;
+        row-gap: 10px;
+    }
+    &__title {
+        font-size: 30px;
+        font-family: $hand-written-font;
+    }
+    &__shopping-cart {
+        position: relative;
+    }
+    &__shopping-cart:hover {
+        color: $main-color;
+    }
+    &__shopping-cart-image {
+        font-size: 25px;
+        width: 30px;
+        height: 30px;
+    }
+    &__category:hover {
+        color: $main-color;
+    }
+}
