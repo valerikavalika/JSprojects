@@ -138,6 +138,35 @@ const displayCompanyCounter = (furniture, filteredFurniture) => {
 	});
 };
 
+function checkTheCounter() {
+  const buttonCollection = companyFilterElement.children;
+  let countObject = {};
+  for(let button of buttonCollection) {
+    countObject[button.id] = (countObject[button.id] || 0);
+    let count = button.children[0].innerText.split('');
+    count = count[1];
+    countObject[button.id] = count; 
+  }
+  let entries = Object.entries(countObject);
+  for(let i = 0; i < entries.length; i++){
+    if(entries[i][1] === '0'){
+      disableButton(entries[i][0]);
+    } else {
+      activateButton(entries[i][0]);
+    }
+  };
+};
+
+function disableButton(id) {
+  const element = document.getElementById(id);
+  element.disabled = true;
+  element.classList.add("disabled");
+};
+function activateButton(id) {
+  const element = document.getElementById(id);
+  element.disabled = false;
+  element.classList.remove("disabled");
+};
 
 const filterByPrice = (furniture) => {
 	const value = parseInt(priceInputElement.value);
@@ -146,11 +175,13 @@ const filterByPrice = (furniture) => {
 		if(filteredProductsByPrice < 1){
 			productItemsElement.innerHTML = `<div class="products__items" > There is no product with this filter..</div>`;
       sessionStorage.setItem("filterByPrice", `${value}`);
-      displayCompanyCounter(furniture, filteredProductsByPrice)
+      displayCompanyCounter(furniture, filteredProductsByPrice);
+      checkTheCounter();
 		} else {
       sessionStorage.setItem("filterByPrice", `${value}`);
       checkAllFilters(furniture);
       displayCompanyCounter(furniture, filteredProductsByPrice);
+      checkTheCounter();
 		}
 };
 
@@ -200,11 +231,15 @@ searchElement.addEventListener("keyup", () => {
       }
     });
     displayProductsList(filteredFurniture);
+    displayCompanyCounter(furniture, filteredFurniture);
+    checkTheCounter();
     if (filteredFurniture.length < 1) {
       productItemsElement.innerHTML = `<div class="products__items" > There is no product with this name..</div>`;
     }
   } else {
     displayProductsList(furniture);
+    displayCompanyCounter(furniture, "");
+    checkTheCounter();
   }
 });
 

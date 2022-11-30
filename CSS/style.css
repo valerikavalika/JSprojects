@@ -408,4 +408,8 @@ ul {
   background-color: rgb(201, 182, 166);
 }
 
+.disabled {
+  color: rgb(161, 158, 158);
+}
+
 /*# sourceMappingURL=style.css.map */
