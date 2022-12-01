@@ -1,0 +1,101 @@
+//get shopping cart elements
+const shoppingCartElement = document.querySelector(".shopping-cart");
+const shoppingCartButton = document.querySelector(".header__shopping-cart");
+const shoppingCartCloseButton = document.querySelector(".shopping-cart__close-button");
+const shoppingCartRemoveAllButton = document.querySelector(".shopping-cart__remove-all-button");
+const mainBlockButton = document.querySelector(".main-block__button");
+const featuredBlockButton = document.querySelector(".featured__button-to-all");
+const shoppingCartItemsElement = document.querySelector(".shopping-cart__products");
+const shoppingCartSubtotalElement = document.querySelector(".shopping-cart__total");
+
+//shopping cart
+let cart = JSON.parse(localStorage.getItem("CART")) || [];
+updateCart();
+
+function addToCart(id) {
+    if (cart.some((item) => item.id === id)) {
+      changeNumberOfUnits("plus", id);
+    } else {
+      const item = furniture.find((product) => product.id === id);
+      cart.push({
+        ...item,
+        numberOfUnits: 1,
+      });
+    }
+    updateCart();
+  };
+  
+  function updateCart() {
+    renderCartItems();
+    renderSubtotal();
+    localStorage.setItem("CART", JSON.stringify(cart));
+  };
+  
+  function renderCartItems() {
+    let productCartItems = cart.map((item) => {
+      return `<div class="shopping-cart__product shopping-cart-product">
+          <div class="shopping-cart-product__image-container">
+          <img  class="shopping-cart-product__image" src="${item.image}" alt="product-image">
+          </div>
+          <div class="shopping-cart-product__details">
+              <p class="shopping-cart-product__name">${item.name}</p>
+              <p class="shopping-cart-product__price">$${item.price}</p>
+              <button class="shopping-cart-product__remove-button" onclick="removeItemFromCart(${item.id})">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z"></path><path fill-rule="evenodd" d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" clip-rule="evenodd"></path></svg>
+              </button>
+          </div>
+          <div class="shopping-cart__product-count product-count">
+              <button class="product-count__up-button product-count__button" onclick="changeNumberOfUnits('plus', ${item.id})">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M868 545.5L536.1 163a31.96 31.96 0 0 0-48.3 0L156 545.5a7.97 7.97 0 0 0 6 13.2h81c4.6 0 9-2 12.1-5.5L474 300.9V864c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V300.9l218.9 252.3c3 3.5 7.4 5.5 12.1 5.5h81c6.8 0 10.5-8 6-13.2z"></path></svg>
+              </button>
+              <h3 class="product-count__count">${item.numberOfUnits}</h3>
+              <button class="product-count__down-button product-count__button" onclick="changeNumberOfUnits('minus', ${item.id})">
+                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M862 465.3h-81c-4.6 0-9 2-12.1 5.5L550 723.1V160c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v563.1L255.1 470.8c-3-3.5-7.4-5.5-12.1-5.5h-81c-6.8 0-10.5 8.1-6 13.2L487.9 861a31.96 31.96 0 0 0 48.3 0L868 478.5c4.5-5.2.8-13.2-6-13.2z"></path></svg>
+              </button>
+          </div>
+      </div>`;
+    });
+    productCartItems = productCartItems.join("");
+    shoppingCartItemsElement.innerHTML = productCartItems;
+  };
+  
+  function renderSubtotal() {
+    let totalPrice = 0;
+    cart.forEach((item) => {
+      totalPrice += item.price * item.numberOfUnits;
+    });
+    shoppingCartSubtotalElement.innerHTML = `Total: $${totalPrice.toFixed(2)}`;
+  };
+  
+  function removeItemFromCart(id) {
+    cart = cart.filter((item) => item.id !== id);
+    updateCart();
+  };
+  
+  shoppingCartRemoveAllButton.addEventListener("click", () => {
+    removeAllFromCart();
+  });
+  
+  function removeAllFromCart() {
+    localStorage.removeItem("CART");
+    cart = [];
+    updateCart();
+  };
+  
+  function changeNumberOfUnits(action, id) {
+    cart = cart.map((item) => {
+      let numberOfUnits = item.numberOfUnits;
+      if (item.id === id) {
+        if (action === "minus" && numberOfUnits > 1) {
+          numberOfUnits--;
+        } else if (action === "plus") {
+          numberOfUnits++;
+        }
+      }
+      return {
+        ...item,
+        numberOfUnits,
+      };
+    });
+    updateCart();
+  };
