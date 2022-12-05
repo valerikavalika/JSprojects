@@ -30,15 +30,12 @@ function displayFeaturedProducts(furniture) {
   
   // function returns random number -- min:0, max: products from json length
   function getRandomNumber(furniture) {
-    let max = furniture.length;
-    const randomNumber = Math.floor(Math.random() * max);
-    return randomNumber;
+    return Math.floor(Math.random()*furniture.length);
   }
   
   //function creates an array(3) of randoms depending on number passed 
   function createRandomArray(randomNumber) {
-    const arrayOfRandoms = [];
-    arrayOfRandoms.push(randomNumber);
+    const arrayOfRandoms = [randomNumber];
     if (randomNumber <= furniture.length && randomNumber > 1) {
       for (let i = 1; i < 3; i++) {
         arrayOfRandoms.push(randomNumber - i);

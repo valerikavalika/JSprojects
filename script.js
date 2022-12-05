@@ -9,7 +9,7 @@ const loadFurniture = async () => {
     displayFeaturedProducts(furniture);
     displayProductsList(furniture);
     displayPriceFilter(furniture);
-    displayCompanyCounter(furniture, "");
+    displayCompanyCounter(furniture, []);
     showHomeSection();
   } catch (err) {
     console.log(err);

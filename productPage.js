@@ -63,8 +63,13 @@ const displayProductsList = (furniture) => {
   
   // display all companies, show number of products next to company
   const displayCompanyCounter = (furniture, filteredFurniture) => {
-    //create an array from all companies with duplicates
-    const companies = createCompaniesArray(furniture, filteredFurniture);
+    let companiesCounterObject = createCompanyKeysObject(furniture);
+    companiesCounterObject = setCompaniesValuesInObject(furniture, filteredFurniture, companiesCounterObject);
+    companiesCounterObject = setAllValueInObject(companiesCounterObject);
+    displayCompanyFilterButtons(companiesCounterObject);
+  };
+
+  function createCompanyKeysObject(furniture) {
     //create unique array of companies
     const uniqueCompanies = createUniqueCompanyArray(furniture);
     //get all company buttons
@@ -76,16 +81,29 @@ const displayProductsList = (furniture) => {
     uniqueCompanies.forEach((element) => {
       count[element] = count[element] || 0;
     });
+    return count;
+  };
+
+  function setCompaniesValuesInObject(furniture, filteredFurniture, count) {
+    //create an array from all companies with duplicates
+    const companies = createCompaniesArray(furniture, filteredFurniture);
     //increase a value in object by 1 when duplicate in array found
     companies.forEach((element) => {
       count[element] = (count[element] || 0) + 1;
     });
+    return count;
+  };
+  function setAllValueInObject(count){
     //get sum of all values in object and set it as value to 'All' key 
     let all = 0;
     for (const value of Object.values(count)) {
       all += value;
     }
     count.All = all;
+    return count;
+  };
+
+  function displayCompanyFilterButtons(count) {
     //create an array of all company filter buttons
     let allButtons = [];
     for (let key in count) {
@@ -153,12 +171,8 @@ const displayProductsList = (furniture) => {
   //return an array from all companies with duplicates
   function createCompaniesArray(furniture, filteredFurniture) {
     let companies = [];
-    if (filteredFurniture === "") {
-      companies = furniture.map((item) => item.company);
-    } else {
-      companies = filteredFurniture.map((item) => item.company);
-    }
-    return companies;
+    companies = filteredFurniture.length === 0 ? furniture : filteredFurniture;
+    return companies.map((item) => item.company);
   };
   
   //return an array from all companies - only unique values
@@ -225,7 +239,7 @@ const displayProductsList = (furniture) => {
       }
     } else {
       displayProductsList(furniture);
-      displayCompanyCounter(furniture, "");
+      displayCompanyCounter(furniture, []);
       checkTheCounter();
     }
   });
